@@ -47,12 +47,12 @@ public class XMLReader {
                 node = nodes.item(0);
                 String ponto = node.getTextContent();
                 String[] pos = ponto.split(",");
-                Point inicial = new Point(Integer.parseInt(pos[0]), Integer.parseInt(pos[1]));
+                Point inicial = new Point(Integer.parseInt(pos[1]), Integer.parseInt(pos[0]));
                 nodes = doc.getElementsByTagName("FINAL");
                 node = nodes.item(0);
                 ponto = node.getTextContent();
                 pos = ponto.split(",");
-                Point fina = new Point(Integer.parseInt(pos[0]), Integer.parseInt(pos[1]));
+                Point fina = new Point(Integer.parseInt(pos[1]), Integer.parseInt(pos[0]));
                 
                 int[][] matriz = new int[linhas][colunas];
                 for (int i = 0; i < linhas; i++) {
