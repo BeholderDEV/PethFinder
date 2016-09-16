@@ -27,7 +27,8 @@ public class MapRenderer extends JComponent{
     Mapa mapa;
     Image tile_set;
     Image cat_sprite;
-    int tile_size = 32;
+    int tile_size = 64;
+    int base = 500;
 
     public MapRenderer(Mapa mapa) {
         this.mapa = mapa;
@@ -56,11 +57,18 @@ public class MapRenderer extends JComponent{
         int[][] matrix = mapa.getMatrix();
         for (int i = 0; i < mapa.getTamanho().height; i++) {
             for (int j = 0; j < mapa.getTamanho().width; j++) {
-                g2d.drawImage(tile_set, j*tile_size, i*tile_size, (j+1)*tile_size, (i+1)*tile_size, matrix[i][j]*tile_size, 0, (matrix[i][j]+1)*tile_size, tile_size, this);
+                int cartX = Math.round(j*tile_size/2f);
+                int cartY =  Math.round(i*tile_size/2f);
+                int isoX = cartX - cartY;
+                int isoY = (cartX + cartY) / 2;
+                g2d.drawImage(tile_set, base+isoX, isoY, base+isoX+tile_size, isoY+tile_size, 0, 0, tile_size, tile_size, this);
+                if(matrix[i][j]==1){
+                    g2d.drawImage(tile_set, base+isoX, isoY-tile_size/2, base+isoX+tile_size, isoY+tile_size/2, tile_size, 0, 2*tile_size, tile_size, this);
+                }
                 if(i==mapa.getPontoInicial().y && j==mapa.getPontoInicial().x){
-                    g2d.drawImage(cat_sprite, j*tile_size, i*tile_size, (j+1)*tile_size, (i+1)*tile_size, matrix[i][j]*tile_size, 0, (matrix[i][j]+1)*tile_size, tile_size, this);
+                    g2d.drawImage(tile_set, base+isoX, isoY-tile_size/2, base+isoX+tile_size, isoY+tile_size/2, 2*tile_size, 0, 3*tile_size, tile_size, this);
                 } else if(i==mapa.getPontoFinal().y && j==mapa.getPontoFinal().x){
-                    g2d.fillRect(j*tile_size, i*tile_size, tile_size, tile_size);
+                    g2d.drawImage(tile_set, base+isoX, isoY-tile_size/2, base+isoX+tile_size, isoY+tile_size/2, 3*tile_size, 0, 4*tile_size, tile_size, this);
                 }
 //                g2d.drawRect(j*tile_size, i*tile_size, tile_size, tile_size);
             }
