@@ -60,7 +60,7 @@ public class MapRenderer extends JComponent{
                 int cartX = Math.round(j*tile_size/2f);
                 int cartY =  Math.round(i*tile_size/2f);
                 int isoX = cartX - cartY;
-                int isoY = (cartX + cartY) / 2;
+                int isoY = Math.round((cartX + cartY) / 2f);
                 g2d.drawImage(tile_set, base+isoX, isoY, base+isoX+tile_size, isoY+tile_size, 0, 0, tile_size, tile_size, this);
                 if(matrix[i][j]==1){
                     g2d.drawImage(tile_set, base+isoX, isoY-tile_size/2, base+isoX+tile_size, isoY+tile_size/2, tile_size, 0, 2*tile_size, tile_size, this);
