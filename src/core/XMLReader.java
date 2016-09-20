@@ -62,14 +62,17 @@ public class XMLReader {
                 }
                 
                 nodes = doc.getElementsByTagName("MURO");
+                int [][] blocked = new int[nodes.getLength()][2];
                 for (int i = 0; i < nodes.getLength(); i++) {
                     node = nodes.item(i);
                     ponto = node.getTextContent();
                     pos = ponto.split(",");
                     matriz[Integer.parseInt(pos[0])][Integer.parseInt(pos[1])]=1;
+                    blocked[i][0]=Integer.parseInt(pos[0]);
+                    blocked[i][1]=Integer.parseInt(pos[1]);
                 }
                 
-                Mapa mapa = new Mapa(tamanho, matriz, inicial, fina);
+                Mapa mapa = new Mapa(tamanho, matriz,blocked, inicial, fina);
                 return mapa;
             } catch (Exception ex) {
                 System.err.println(ex);
