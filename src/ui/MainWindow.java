@@ -7,6 +7,8 @@ package ui;
 
 import core.XMLReader;
 import core.model.Mapa;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import ui.swing.MapRenderer;
 
 /**
@@ -32,6 +34,7 @@ public class MainWindow extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         webButton1 = new com.alee.laf.button.WebButton();
 
@@ -40,6 +43,8 @@ public class MainWindow extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 20, 20, 20));
         jPanel1.setLayout(new java.awt.BorderLayout());
+        jPanel1.add(jLabel1, java.awt.BorderLayout.CENTER);
+
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
         jPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
@@ -60,9 +65,9 @@ public class MainWindow extends javax.swing.JFrame {
     private void webButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_webButton1ActionPerformed
         Mapa mapa = XMLReader.lerXML();
         System.out.println("carregou");
-        MapRenderer mapRenderer = new MapRenderer(mapa);
+        Image image= MapRenderer.getInstance().getImage(mapa);
         System.out.println("criou render");
-        jPanel1.add(mapRenderer);
+        jLabel1.setIcon(new ImageIcon(image));
         jPanel1.revalidate();
         System.out.println("setou");
     }//GEN-LAST:event_webButton1ActionPerformed
@@ -103,6 +108,7 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private com.alee.laf.button.WebButton webButton1;
