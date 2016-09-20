@@ -7,18 +7,13 @@ package ui.swing;
 
 import core.model.Mapa;
 import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
-import java.io.File;
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 
 /**
@@ -58,7 +53,8 @@ public class MapRenderer extends JComponent{
     
     public Image getImage(Mapa mapa) {
         
-        BufferedImage bi = new BufferedImage(mapa.getMatrix().length*tile_size, mapa.getMatrix()[0].length*tile_size/2, BufferedImage.TYPE_4BYTE_ABGR);
+        BufferedImage bi = new BufferedImage((mapa.getMatrix().length+1)*tile_size, (mapa.getMatrix()[0].length+1)*tile_size/2, BufferedImage.TYPE_4BYTE_ABGR);
+        base = mapa.getMatrix().length*tile_size/2;
         Graphics2D g2d = (Graphics2D) bi.getGraphics();
         System.out.println("print");
         
@@ -78,6 +74,8 @@ public class MapRenderer extends JComponent{
                     g2d.drawImage(tile_set, base+isoX, isoY-tile_size/2, base+isoX+tile_size, isoY+tile_size/2, 2*tile_size, 0, 3*tile_size, tile_size, observer);
                 } else if(i==mapa.getPontoFinal().y && j==mapa.getPontoFinal().x){
                     g2d.drawImage(tile_set, base+isoX, isoY-tile_size/2, base+isoX+tile_size, isoY+tile_size/2, 3*tile_size, 0, 4*tile_size, tile_size, observer);
+               } else if(mapa.getPathMatrix()[i][j]){
+                    g2d.drawImage(tile_set, base+isoX, isoY-tile_size/2, base+isoX+tile_size, isoY+tile_size/2, 4*tile_size, 0, 5*tile_size, tile_size, this);
                 }
 //                g2d.drawRect(j*tile_size, i*tile_size, tile_size, tile_size);
             }

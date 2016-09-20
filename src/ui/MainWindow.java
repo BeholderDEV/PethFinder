@@ -7,6 +7,7 @@ package ui;
 
 import core.XMLReader;
 import core.model.Mapa;
+import core.search.AStar;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import ui.swing.MapRenderer;
@@ -39,7 +40,7 @@ public class MainWindow extends javax.swing.JFrame {
         webButton1 = new com.alee.laf.button.WebButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1000, 600));
+        setPreferredSize(new java.awt.Dimension(1200, 700));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 20, 20, 20));
         jPanel1.setLayout(new java.awt.BorderLayout());
@@ -65,11 +66,14 @@ public class MainWindow extends javax.swing.JFrame {
     private void webButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_webButton1ActionPerformed
         Mapa mapa = XMLReader.lerXML();
         System.out.println("carregou");
+        mapa.setPathMatrix(AStar.test(mapa));
+        System.out.println("descobriu caminho");
         Image image= MapRenderer.getInstance().getImage(mapa);
         System.out.println("criou render");
         jLabel1.setIcon(new ImageIcon(image));
         jPanel1.revalidate();
         System.out.println("setou");
+        
     }//GEN-LAST:event_webButton1ActionPerformed
 
     /**
