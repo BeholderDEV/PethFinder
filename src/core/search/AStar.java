@@ -209,6 +209,7 @@ public class AStar {
                         path[i][j]=false;
                     }
                 }
+                path[si][sj]=true;
                 System.out.println("Path: ");
                 Cell current = grid[endI][endJ];
                 System.out.print(current);

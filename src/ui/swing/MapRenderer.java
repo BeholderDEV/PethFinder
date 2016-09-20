@@ -70,13 +70,15 @@ public class MapRenderer extends JComponent{
                 if(matrix[i][j]==1){
                     g2d.drawImage(tile_set, base+isoX, isoY-tile_size/2, base+isoX+tile_size, isoY+tile_size/2, tile_size, 0, 2*tile_size, tile_size, observer);
                 }
+                if(mapa.getPathMatrix()[i][j]){
+                    g2d.drawImage(tile_set, base+isoX, isoY-tile_size/2, base+isoX+tile_size, isoY+tile_size/2, 4*tile_size, 0, 5*tile_size, tile_size, this);
+                }
                 if(i==mapa.getPontoInicial().y && j==mapa.getPontoInicial().x){
                     g2d.drawImage(tile_set, base+isoX, isoY-tile_size/2, base+isoX+tile_size, isoY+tile_size/2, 2*tile_size, 0, 3*tile_size, tile_size, observer);
                 } else if(i==mapa.getPontoFinal().y && j==mapa.getPontoFinal().x){
                     g2d.drawImage(tile_set, base+isoX, isoY-tile_size/2, base+isoX+tile_size, isoY+tile_size/2, 3*tile_size, 0, 4*tile_size, tile_size, observer);
-               } else if(mapa.getPathMatrix()[i][j]){
-                    g2d.drawImage(tile_set, base+isoX, isoY-tile_size/2, base+isoX+tile_size, isoY+tile_size/2, 4*tile_size, 0, 5*tile_size, tile_size, this);
                 }
+                
 //                g2d.drawRect(j*tile_size, i*tile_size, tile_size, tile_size);
             }
         }
