@@ -8,9 +8,14 @@ package ui;
 import core.XMLReader;
 import core.model.Mapa;
 import core.search.AStar;
+import java.awt.Color;
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import ui.swing.MapRenderer;
+import ui.utils.ColorController;
+import ui.webLaf.PSOutTabbedPaneUI;
+import ui.webLaf.WeblafUtils;
 
 /**
  *
@@ -19,12 +24,26 @@ import ui.swing.MapRenderer;
 public class MainWindow extends javax.swing.JFrame {
 
     /**
-     * Creates new form MainWindow
+     * Creates new form MainWIndow
      */
     public MainWindow() {
         initComponents();
+        configureTheme();
     }
-
+    private void configureTheme(){
+        WeblafUtils.instalaWeblaf();
+        WeblafUtils.configuraWeblaf(jPanel2);
+        jTabbedPane1.setUI(new PSOutTabbedPaneUI());
+        WeblafUtils.configurarBotao(webButton4, ColorController.COR_DESTAQUE, ColorController.COR_LETRA);
+        WeblafUtils.configurarBotao(webButton2, ColorController.COR_PRINCIPAL, ColorController.COR_LETRA,ColorController.PROGRESS_BAR, Color.orange, 5);
+        WeblafUtils.configurarBotao(webButton3, ColorController.COR_PRINCIPAL, ColorController.COR_LETRA,ColorController.FUNDO_CLARO, Color.orange, 5);
+        jPanel2.setBackground(ColorController.COR_PRINCIPAL);
+        jPanel1.setBackground(ColorController.COR_PRINCIPAL);
+        jPanel6.setBackground(ColorController.COR_PRINCIPAL);
+        jLabel2.setForeground(ColorController.COR_LETRA);
+        jPanel3.setBackground(ColorController.COR_PRINCIPAL); 
+        jTabbedPane1.setForeground(ColorController.COR_LETRA);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -34,47 +53,111 @@ public class MainWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel3 = new javax.swing.JPanel();
+        labelURl = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        webButton3 = new com.alee.laf.button.WebButton();
+        webButton2 = new com.alee.laf.button.WebButton();
+        jPanel2 = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
+        webButton4 = new com.alee.laf.button.WebButton();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        webButton1 = new com.alee.laf.button.WebButton();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1200, 700));
+        setUndecorated(true);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 20, 20, 20));
-        jPanel1.setLayout(new java.awt.BorderLayout());
-        jPanel1.add(jLabel1, java.awt.BorderLayout.CENTER);
+        jPanel3.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 5));
+        jPanel3.setPreferredSize(new java.awt.Dimension(45, 45));
+        jPanel3.setLayout(new java.awt.BorderLayout());
 
-        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
+        labelURl.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        labelURl.setForeground(new java.awt.Color(250, 250, 250));
+        labelURl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelURl.setText("Peth Finder");
+        jPanel3.add(labelURl, java.awt.BorderLayout.CENTER);
 
-        jPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
+        jPanel4.setOpaque(false);
+        jPanel4.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 5, 0));
 
-        webButton1.setText("webButton1");
-        webButton1.addActionListener(new java.awt.event.ActionListener() {
+        webButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/resources/window_min.png"))); // NOI18N
+        webButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                webButton1ActionPerformed(evt);
+                webButton3ActionPerformed(evt);
             }
         });
-        jPanel2.add(webButton1);
+        jPanel4.add(webButton3);
 
-        getContentPane().add(jPanel2, java.awt.BorderLayout.SOUTH);
+        webButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/resources/window_close.png"))); // NOI18N
+        webButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                webButton2ActionPerformed(evt);
+            }
+        });
+        jPanel4.add(webButton2);
+
+        jPanel3.add(jPanel4, java.awt.BorderLayout.EAST);
+
+        getContentPane().add(jPanel3, java.awt.BorderLayout.NORTH);
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        jPanel2.setMinimumSize(new java.awt.Dimension(640, 480));
+        jPanel2.setPreferredSize(new java.awt.Dimension(640, 480));
+        jPanel2.setLayout(new java.awt.BorderLayout(20, 20));
+
+        jPanel5.setOpaque(false);
+        jPanel5.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
+
+        webButton4.setText("Carregar XML");
+        webButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                webButton4ActionPerformed(evt);
+            }
+        });
+        jPanel5.add(webButton4);
+
+        jPanel2.add(jPanel5, java.awt.BorderLayout.SOUTH);
+
+        jPanel1.setLayout(new java.awt.BorderLayout());
+
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel1.add(jLabel1, java.awt.BorderLayout.CENTER);
+
+        jTabbedPane1.addTab("Imagem", jPanel1);
+
+        jPanel6.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        jPanel6.setLayout(new java.awt.BorderLayout());
+
+        jLabel2.setText("jLabel2");
+        jLabel2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jPanel6.add(jLabel2, java.awt.BorderLayout.CENTER);
+
+        jTabbedPane1.addTab("Console", jPanel6);
+
+        jPanel2.add(jTabbedPane1, java.awt.BorderLayout.CENTER);
+
+        getContentPane().add(jPanel2, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void webButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_webButton1ActionPerformed
+    private void webButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_webButton3ActionPerformed
+        setExtendedState(JFrame.ICONIFIED);
+    }//GEN-LAST:event_webButton3ActionPerformed
+
+    private void webButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_webButton2ActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_webButton2ActionPerformed
+
+    private void webButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_webButton4ActionPerformed
         Mapa mapa = XMLReader.lerXML();
-        System.out.println("carregou");
         mapa.setPathMatrix(AStar.test(mapa));
-        System.out.println("descobriu caminho");
         Image image= MapRenderer.getInstance().getImage(mapa);
-        System.out.println("criou render");
         jLabel1.setIcon(new ImageIcon(image));
-        jPanel1.revalidate();
-        System.out.println("setou");
-        
-    }//GEN-LAST:event_webButton1ActionPerformed
+    }//GEN-LAST:event_webButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -102,6 +185,7 @@ public class MainWindow extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -113,8 +197,17 @@ public class MainWindow extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private com.alee.laf.button.WebButton webButton1;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JLabel labelURl;
+    private com.alee.laf.button.WebButton webButton2;
+    private com.alee.laf.button.WebButton webButton3;
+    private com.alee.laf.button.WebButton webButton4;
     // End of variables declaration//GEN-END:variables
 }
