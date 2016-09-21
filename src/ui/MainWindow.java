@@ -12,6 +12,8 @@ import java.awt.Color;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import ui.swing.MapRenderer;
 import ui.utils.ColorController;
 import ui.webLaf.PSOutTabbedPaneUI;
@@ -33,14 +35,15 @@ public class MainWindow extends javax.swing.JFrame {
     private void configureTheme(){
         WeblafUtils.instalaWeblaf();
         WeblafUtils.configuraWeblaf(jPanel2);
+        WeblafUtils.configuraWebLaf(jTextArea1);
         jTabbedPane1.setUI(new PSOutTabbedPaneUI());
         WeblafUtils.configurarBotao(webButton4, ColorController.COR_DESTAQUE, ColorController.COR_LETRA);
         WeblafUtils.configurarBotao(webButton2, ColorController.COR_PRINCIPAL, ColorController.COR_LETRA,ColorController.PROGRESS_BAR, Color.orange, 5);
         WeblafUtils.configurarBotao(webButton3, ColorController.COR_PRINCIPAL, ColorController.COR_LETRA,ColorController.FUNDO_CLARO, Color.orange, 5);
         jPanel2.setBackground(ColorController.COR_PRINCIPAL);
         jPanel1.setBackground(ColorController.COR_PRINCIPAL);
-        jPanel6.setBackground(ColorController.COR_PRINCIPAL);
-        jLabel2.setForeground(ColorController.COR_LETRA);
+        jTextArea1.setBackground(ColorController.COR_PRINCIPAL);
+        jTextArea1.setForeground(ColorController.COR_LETRA);
         jPanel3.setBackground(ColorController.COR_PRINCIPAL); 
         jTabbedPane1.setForeground(ColorController.COR_LETRA);
     }
@@ -64,8 +67,10 @@ public class MainWindow extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jPanel6 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -128,14 +133,26 @@ public class MainWindow extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Imagem", jPanel1);
 
-        jPanel6.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 20, 20, 20));
-        jPanel6.setLayout(new java.awt.BorderLayout());
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable1);
 
-        jLabel2.setText("jLabel2");
-        jLabel2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jPanel6.add(jLabel2, java.awt.BorderLayout.CENTER);
+        jTabbedPane1.addTab("tab3", jScrollPane2);
 
-        jTabbedPane1.addTab("Console", jPanel6);
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
+
+        jTabbedPane1.addTab("Console", jScrollPane1);
 
         jPanel2.add(jTabbedPane1, java.awt.BorderLayout.CENTER);
 
@@ -154,9 +171,15 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void webButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_webButton4ActionPerformed
         Mapa mapa = XMLReader.lerXML();
-        mapa.setPathMatrix(AStar.test(mapa));
-        Image image= MapRenderer.getInstance().getImage(mapa);
-        jLabel1.setIcon(new ImageIcon(image));
+        mapa.setPathMatrix(AStar.getInstance().getPath(mapa));
+        jTextArea1.setText(AStar.getInstance().getConsoleLog());
+        TableModel model = new DefaultTableModel(AStar.getInstance().getCosts(), new String[]{" - "," - "," - "," - "," - "," - "," - "," - "," - "," - "," - "," - "," - "," - "," - "});
+        jTable1.setModel(model);
+        if(mapa.getPathMatrix()!=null){
+            Image image= MapRenderer.getInstance().getImage(mapa);
+            jLabel1.setIcon(new ImageIcon(image));
+        }
+        
     }//GEN-LAST:event_webButton4ActionPerformed
 
     /**
@@ -197,14 +220,16 @@ public class MainWindow extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel labelURl;
     private com.alee.laf.button.WebButton webButton2;
     private com.alee.laf.button.WebButton webButton3;

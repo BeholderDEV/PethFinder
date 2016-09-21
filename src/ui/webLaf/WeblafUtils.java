@@ -41,7 +41,7 @@ public class WeblafUtils {
     public static final Color BACKGROUND_ESCURO = new Color(243, 243, 243);
     public static final Color COR_DA_BORDA_ORIGINAL_NO_WEBLAF = StyleConstants.borderColor;
     
-
+    
 
     public static void configuraWeblaf(JToolBar barraDeFerramentas) {
         if (!WeblafUtils.weblafEstaInstalado()) {
