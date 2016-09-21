@@ -51,12 +51,41 @@ public class MapRenderer extends JComponent{
         return mapRenderer;
     }
     
-    public Image getImage(Mapa mapa) {
+    public Image getFirstImage(Mapa mapa) {
         
         BufferedImage bi = new BufferedImage((mapa.getMatrix().length+1)*tile_size, (mapa.getMatrix()[0].length+1)*tile_size/2, BufferedImage.TYPE_4BYTE_ABGR);
         base = mapa.getMatrix().length*tile_size/2;
         Graphics2D g2d = (Graphics2D) bi.getGraphics();
-        System.out.println("print");
+        
+        g2d.setColor(Color.DARK_GRAY);
+        int[][] matrix = mapa.getMatrix();
+        for (int i = 0; i < mapa.getTamanho().height; i++) {
+            for (int j = 0; j < mapa.getTamanho().width; j++) {
+                int cartX = Math.round(j*tile_size/2f);
+                int cartY =  Math.round(i*tile_size/2f);
+                int isoX = cartX - cartY;
+                int isoY = Math.round((cartX + cartY) / 2f);
+                g2d.drawImage(tile_set, base+isoX, isoY, base+isoX+tile_size, isoY+tile_size, 0, 0, tile_size, tile_size, observer);
+                if(matrix[i][j]==1){
+                    g2d.drawImage(tile_set, base+isoX, isoY-tile_size/2, base+isoX+tile_size, isoY+tile_size/2, tile_size, 0, 2*tile_size, tile_size, observer);
+                }
+                
+                if(i==mapa.getPontoInicial().y && j==mapa.getPontoInicial().x){
+                    g2d.drawImage(tile_set, base+isoX, isoY-tile_size/2, base+isoX+tile_size, isoY+tile_size/2, 2*tile_size, 0, 3*tile_size, tile_size, observer);
+                } else if(i==mapa.getPontoFinal().y && j==mapa.getPontoFinal().x){
+                    g2d.drawImage(tile_set, base+isoX, isoY-tile_size/2, base+isoX+tile_size, isoY+tile_size/2, 3*tile_size, 0, 4*tile_size, tile_size, observer);
+                }
+                
+//                g2d.drawRect(j*tile_size, i*tile_size, tile_size, tile_size);
+            }
+        }
+        return bi;
+    }
+    public Image getPathedImage(Mapa mapa) {
+        
+        BufferedImage bi = new BufferedImage((mapa.getMatrix().length+1)*tile_size, (mapa.getMatrix()[0].length+1)*tile_size/2, BufferedImage.TYPE_4BYTE_ABGR);
+        base = mapa.getMatrix().length*tile_size/2;
+        Graphics2D g2d = (Graphics2D) bi.getGraphics();
         
         g2d.setColor(Color.DARK_GRAY);
         int[][] matrix = mapa.getMatrix();

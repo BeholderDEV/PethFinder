@@ -5,6 +5,7 @@
  */
 package ui;
 
+import core.PFReader;
 import core.XMLReader;
 import core.model.Mapa;
 import core.search.AStar;
@@ -24,7 +25,7 @@ import ui.webLaf.WeblafUtils;
  * @author lite
  */
 public class MainWindow extends javax.swing.JFrame {
-
+    Mapa mapa;
     /**
      * Creates new form MainWIndow
      */
@@ -36,16 +37,19 @@ public class MainWindow extends javax.swing.JFrame {
         WeblafUtils.instalaWeblaf();
         WeblafUtils.configuraWeblaf(jPanel2);
         WeblafUtils.configuraWebLaf(jTextArea1);
+        WeblafUtils.configuraWebLaf(jScrollPane1);
         jTabbedPane1.setUI(new PSOutTabbedPaneUI());
+        WeblafUtils.configurarBotao(webButton5, ColorController.COR_DESTAQUE, ColorController.COR_LETRA);
         WeblafUtils.configurarBotao(webButton4, ColorController.COR_DESTAQUE, ColorController.COR_LETRA);
+        WeblafUtils.configurarBotao(webButton1, ColorController.COR_DESTAQUE, ColorController.COR_LETRA);
         WeblafUtils.configurarBotao(webButton2, ColorController.COR_PRINCIPAL, ColorController.COR_LETRA,ColorController.PROGRESS_BAR, Color.orange, 5);
         WeblafUtils.configurarBotao(webButton3, ColorController.COR_PRINCIPAL, ColorController.COR_LETRA,ColorController.FUNDO_CLARO, Color.orange, 5);
+        
         jPanel2.setBackground(ColorController.COR_PRINCIPAL);
-        jPanel1.setBackground(ColorController.COR_PRINCIPAL);
         jTextArea1.setBackground(ColorController.COR_PRINCIPAL);
         jTextArea1.setForeground(ColorController.COR_LETRA);
         jPanel3.setBackground(ColorController.COR_PRINCIPAL); 
-        jTabbedPane1.setForeground(ColorController.COR_LETRA);
+        jTabbedPane1.setForeground(ColorController.COR_LETRA);        
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -63,14 +67,15 @@ public class MainWindow extends javax.swing.JFrame {
         webButton2 = new com.alee.laf.button.WebButton();
         jPanel2 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        webButton1 = new com.alee.laf.button.WebButton();
         webButton4 = new com.alee.laf.button.WebButton();
+        webButton5 = new com.alee.laf.button.WebButton();
+        jSplitPane1 = new javax.swing.JSplitPane();
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -116,6 +121,17 @@ public class MainWindow extends javax.swing.JFrame {
         jPanel5.setOpaque(false);
         jPanel5.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
 
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Raio", "Gulosa" }));
+        jPanel5.add(jComboBox1);
+
+        webButton1.setText("Carregar PF");
+        webButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                webButton1ActionPerformed(evt);
+            }
+        });
+        jPanel5.add(webButton1);
+
         webButton4.setText("Carregar XML");
         webButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -124,37 +140,32 @@ public class MainWindow extends javax.swing.JFrame {
         });
         jPanel5.add(webButton4);
 
+        webButton5.setText("Calcular");
+        webButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                webButton5ActionPerformed(evt);
+            }
+        });
+        jPanel5.add(webButton5);
+
         jPanel2.add(jPanel5, java.awt.BorderLayout.SOUTH);
 
-        jPanel1.setLayout(new java.awt.BorderLayout());
-
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jPanel1.add(jLabel1, java.awt.BorderLayout.CENTER);
-
-        jTabbedPane1.addTab("Imagem", jPanel1);
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane2.setViewportView(jTable1);
-
-        jTabbedPane1.addTab("tab3", jScrollPane2);
+        jSplitPane1.setDividerLocation(450);
+        jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
         jTextArea1.setColumns(20);
+        jTextArea1.setFont(new java.awt.Font("Courier New", 0, 13)); // NOI18N
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
         jTabbedPane1.addTab("Console", jScrollPane1);
 
-        jPanel2.add(jTabbedPane1, java.awt.BorderLayout.CENTER);
+        jSplitPane1.setBottomComponent(jTabbedPane1);
+
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jSplitPane1.setLeftComponent(jLabel1);
+
+        jPanel2.add(jSplitPane1, java.awt.BorderLayout.CENTER);
 
         getContentPane().add(jPanel2, java.awt.BorderLayout.CENTER);
 
@@ -170,17 +181,29 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_webButton2ActionPerformed
 
     private void webButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_webButton4ActionPerformed
-        Mapa mapa = XMLReader.lerXML();
-        mapa.setPathMatrix(AStar.getInstance().getPath(mapa));
-        jTextArea1.setText(AStar.getInstance().getConsoleLog());
-        TableModel model = new DefaultTableModel(AStar.getInstance().getCosts(), new String[]{" - "," - "," - "," - "," - "," - "," - "," - "," - "," - "," - "," - "," - "," - "," - "});
-        jTable1.setModel(model);
-        if(mapa.getPathMatrix()!=null){
-            Image image= MapRenderer.getInstance().getImage(mapa);
-            jLabel1.setIcon(new ImageIcon(image));
-        }
-        
+        mapa = XMLReader.lerXML();
+        Image image= MapRenderer.getInstance().getFirstImage(mapa);
+        jLabel1.setIcon(new ImageIcon(image));
     }//GEN-LAST:event_webButton4ActionPerformed
+
+    private void webButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_webButton1ActionPerformed
+        mapa = PFReader.lerPF();
+        Image image= MapRenderer.getInstance().getFirstImage(mapa);
+        jLabel1.setIcon(new ImageIcon(image));
+        
+    }//GEN-LAST:event_webButton1ActionPerformed
+
+    private void webButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_webButton5ActionPerformed
+        if(mapa!=null){
+            mapa.setPathMatrix(AStar.getInstance().getPath(mapa,jComboBox1.getSelectedItem().toString()));
+            jTextArea1.setText(AStar.getInstance().getConsoleLog());
+            TableModel model = new DefaultTableModel(AStar.getInstance().getCosts(), new String[]{" - "," - "," - "," - "," - "," - "," - "," - "," - "," - "," - "," - "," - "," - "," - "});
+            if(mapa.getPathMatrix()!=null){
+                Image image= MapRenderer.getInstance().getPathedImage(mapa);
+                jLabel1.setIcon(new ImageIcon(image));
+            }
+        }
+    }//GEN-LAST:event_webButton5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -219,20 +242,21 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel labelURl;
+    private com.alee.laf.button.WebButton webButton1;
     private com.alee.laf.button.WebButton webButton2;
     private com.alee.laf.button.WebButton webButton3;
     private com.alee.laf.button.WebButton webButton4;
+    private com.alee.laf.button.WebButton webButton5;
     // End of variables declaration//GEN-END:variables
 }

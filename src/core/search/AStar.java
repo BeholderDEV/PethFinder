@@ -6,7 +6,6 @@
 package core.search;
 
 import com.bethecoder.ascii_table.ASCIITable;
-import com.bethecoder.ascii_table.ASCIITableHeader;
 import core.model.Cell;
 import core.model.Mapa;
 import java.util.PriorityQueue;
@@ -19,6 +18,7 @@ public class AStar {
     private static AStar aStar;
     private String consoleLog = "";
     private String[][] costs;
+    private int iterations=0;
     public final int DIAGONAL_COST = 14;
     public final int V_H_COST = 10;
     
@@ -45,9 +45,20 @@ public class AStar {
         endJ = j; 
     }
     
-    static void checkAndUpdateCost(Cell current, Cell t, int cost){
+    static void checkAndUpdateCostRaio(Cell current, Cell t, int cost){
         if(t == null || closed[t.getPosition().y][t.getPosition().x])return;
         int t_final_cost = t.getHeuristicCost()+cost;
+        
+        boolean inOpen = open.contains(t);
+        if(!inOpen || t_final_cost<t.getFinalCost()){
+            t.setFinalCost(t_final_cost);
+            t.setParent(current);
+            if(!inOpen)open.add(t);
+        }
+    }
+    static void checkAndUpdateCostGuloso(Cell current, Cell t, int cost){
+        if(t == null || closed[t.getPosition().y][t.getPosition().x])return;
+        int t_final_cost = t.getHeuristicCost();
         
         boolean inOpen = open.contains(t);
         if(!inOpen || t_final_cost<t.getFinalCost()){
@@ -76,12 +87,13 @@ public class AStar {
         }
         return aStar;
     }
-    private void calculate(){
+    private void calculateGuloso(){
         open.add(grid[startI][startJ]);
         
         Cell current;
         
         while(true){ 
+            iterations++;
             current = open.poll();
             if(current==null)break;
             closed[current.getPosition().y][current.getPosition().x]=true; 
@@ -93,41 +105,98 @@ public class AStar {
             Cell t;  
             if(current.getPosition().y-1>=0){
                 t = grid[current.getPosition().y-1][current.getPosition().x];
-                checkAndUpdateCost(current, t, current.getFinalCost()+V_H_COST); 
+                checkAndUpdateCostGuloso(current, t, current.getFinalCost()+V_H_COST); 
 
                 if(current.getPosition().x-1>=0){                      
                     t = grid[current.getPosition().y-1][current.getPosition().x-1];
-                    checkAndUpdateCost(current, t, current.getFinalCost()+DIAGONAL_COST); 
+                    checkAndUpdateCostGuloso(current, t, current.getFinalCost()+DIAGONAL_COST); 
                 }
 
                 if(current.getPosition().x+1<grid[0].length){
                     t = grid[current.getPosition().y-1][current.getPosition().x+1];
-                    checkAndUpdateCost(current, t, current.getFinalCost()+DIAGONAL_COST); 
+                    checkAndUpdateCostGuloso(current, t, current.getFinalCost()+DIAGONAL_COST); 
                 }
             } 
 
             if(current.getPosition().x-1>=0){
                 t = grid[current.getPosition().y][current.getPosition().x-1];
-                checkAndUpdateCost(current, t, current.getFinalCost()+V_H_COST); 
+                checkAndUpdateCostGuloso(current, t, current.getFinalCost()+V_H_COST); 
             }
 
             if(current.getPosition().x+1<grid[0].length){
                 t = grid[current.getPosition().y][current.getPosition().x+1];
-                checkAndUpdateCost(current, t, current.getFinalCost()+V_H_COST); 
+                checkAndUpdateCostGuloso(current, t, current.getFinalCost()+V_H_COST); 
             }
 
             if(current.getPosition().y+1<grid.length){
                 t = grid[current.getPosition().y+1][current.getPosition().x];
-                checkAndUpdateCost(current, t, current.getFinalCost()+V_H_COST); 
+                checkAndUpdateCostGuloso(current, t, current.getFinalCost()+V_H_COST); 
 
                 if(current.getPosition().x-1>=0){
                     t = grid[current.getPosition().y+1][current.getPosition().x-1];
-                    checkAndUpdateCost(current, t, current.getFinalCost()+DIAGONAL_COST); 
+                    checkAndUpdateCostGuloso(current, t, current.getFinalCost()+DIAGONAL_COST); 
                 }
                 
                 if(current.getPosition().x+1<grid[0].length){
                    t = grid[current.getPosition().y+1][current.getPosition().x+1];
-                    checkAndUpdateCost(current, t, current.getFinalCost()+DIAGONAL_COST); 
+                    checkAndUpdateCostGuloso(current, t, current.getFinalCost()+DIAGONAL_COST); 
+                }  
+            }
+        } 
+    }
+    private void calculateRaio(){
+        open.add(grid[startI][startJ]);
+        
+        Cell current;
+        
+        while(true){ 
+            iterations++;
+            current = open.poll();
+            if(current==null)break;
+            closed[current.getPosition().y][current.getPosition().x]=true; 
+
+            if(current.equals(grid[endI][endJ])){
+                return; 
+            } 
+
+            Cell t;  
+            if(current.getPosition().y-1>=0){
+                t = grid[current.getPosition().y-1][current.getPosition().x];
+                checkAndUpdateCostRaio(current, t, current.getFinalCost()+V_H_COST); 
+
+                if(current.getPosition().x-1>=0){                      
+                    t = grid[current.getPosition().y-1][current.getPosition().x-1];
+                    checkAndUpdateCostRaio(current, t, current.getFinalCost()+DIAGONAL_COST); 
+                }
+
+                if(current.getPosition().x+1<grid[0].length){
+                    t = grid[current.getPosition().y-1][current.getPosition().x+1];
+                    checkAndUpdateCostRaio(current, t, current.getFinalCost()+DIAGONAL_COST); 
+                }
+            } 
+
+            if(current.getPosition().x-1>=0){
+                t = grid[current.getPosition().y][current.getPosition().x-1];
+                checkAndUpdateCostRaio(current, t, current.getFinalCost()+V_H_COST); 
+            }
+
+            if(current.getPosition().x+1<grid[0].length){
+                t = grid[current.getPosition().y][current.getPosition().x+1];
+                checkAndUpdateCostRaio(current, t, current.getFinalCost()+V_H_COST); 
+            }
+
+            if(current.getPosition().y+1<grid.length){
+                t = grid[current.getPosition().y+1][current.getPosition().x];
+                checkAndUpdateCostRaio(current, t, current.getFinalCost()+V_H_COST); 
+
+                if(current.getPosition().x-1>=0){
+                    t = grid[current.getPosition().y+1][current.getPosition().x-1];
+                    checkAndUpdateCostRaio(current, t, current.getFinalCost()+DIAGONAL_COST); 
+                }
+                
+                if(current.getPosition().x+1<grid[0].length){
+                   t = grid[current.getPosition().y+1][current.getPosition().x+1];
+                    checkAndUpdateCostRaio(current, t, current.getFinalCost()+DIAGONAL_COST); 
                 }  
             }
         } 
@@ -141,7 +210,8 @@ public class AStar {
     ei, ej = end location's x and y coordinates
     int[][] blocked = array containing inaccessible cell coordinates
     */
-    public boolean[][] getPath(Mapa mapa){
+    public boolean[][] getPath(Mapa mapa, String tipo){
+        consoleLog="";
         int x= mapa.getTamanho().width;
         int y= mapa.getTamanho().height;
         int si = mapa.getPontoInicial().y;
@@ -149,7 +219,6 @@ public class AStar {
         int ei = mapa.getPontoFinal().y;
         int ej = mapa.getPontoFinal().x;
         int[][] blocked = mapa.getBlocked();
-        //Reset
         grid = new Cell[x][y];
         closed = new boolean[x][y];
         open = new PriorityQueue<>((Object o1, Object o2) -> {
@@ -159,42 +228,46 @@ public class AStar {
              return c1.getFinalCost()<c2.getFinalCost()?-1:
                      c1.getFinalCost()>c2.getFinalCost()?1:0;
          });
-        //Set start position
-        setStartCell(si, sj);  //Setting to 0,0 by default. Will be useful for the UI part
+        setStartCell(si, sj);
 
-        //Set End Location
         setEndCell(ei, ej); 
 
         for(int i=0;i<x;++i){
            for(int j=0;j<y;++j){
                grid[i][j] = new Cell(i, j);
                grid[i][j].setHeuristicCost((Math.abs(i-endI)+Math.abs(j-endJ)));
-//                  System.out.print(grid[i][j].heuristicCost+" ");
            }
-//              System.out.println();
         }
         grid[si][sj].setFinalCost(0);
-
-        /*
-          Set blocked cells. Simply set the cell values to null
-          for blocked cells.
-        */
         for(int i=0;i<blocked.length;++i){
             setBlocked(blocked[i][0], blocked[i][1]);
         }
-        calculate(); 
+        if(tipo.contentEquals("Raio")){
+            calculateRaio();
+        }else{
+            calculateGuloso(); 
+        }
+        
         costs = new String[x][y];
         for(int i=0;i<x;++i){
             for(int j=0;j<y;++j){
                 if(grid[i][j]!=null){
-                    costs[i][j]= grid[i][j].getFinalCost()+"";
+                    costs[i][j] = grid[i][j].getFinalCost()+"";
+//                    if(costs[i][j].length()<3){
+//                        int space=3-costs[i][j].length();
+//                        String sc="";
+//                        for (int k = 0; k < space; k++) {
+//                            sc=sc.concat("0");
+//                        }
+//                        costs[i][j] = sc.concat(costs[i][j]);
+//                    }
                 }
                 else{
                     costs[i][j]= "BL";
                 }
             }
-        }
-                
+        }  
+        consoleLog = consoleLog.concat(ASCIITable.getInstance().getTable(new String[] {}, costs));
         if(closed[endI][endJ]){
             //Trace back the path 
              boolean[][] path = new boolean[y][x];
@@ -203,7 +276,6 @@ public class AStar {
                      path[i][j]=false;
                  }
              }
-             path[si][sj]=true;
              consoleLog = consoleLog.concat("Path: \n");
              Cell current = grid[endI][endJ];
              consoleLog = consoleLog.concat(current+"");
@@ -213,8 +285,12 @@ public class AStar {
                  current = current.getParent();
              } 
              consoleLog = consoleLog.concat("\n");
+             consoleLog = consoleLog.concat("Iterationr: "+iterations);
+             iterations=0;
              return path;
-        }else consoleLog = consoleLog.concat("No possible path");
+        }else{
+            consoleLog = consoleLog.concat("No possible path");
+        }
         return null;
     }
     
