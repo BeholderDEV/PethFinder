@@ -252,7 +252,7 @@ public class AStar {
         for(int i=0;i<x;++i){
             for(int j=0;j<y;++j){
                 if(grid[i][j]!=null){
-                    costs[i][j] = grid[i][j].getFinalCost()+"";
+                    costs[i][j] = "[f:"+grid[i][j].getFinalCost()+" | h:"+grid[i][j].getHeuristicCost()+"]";
 //                    if(costs[i][j].length()<3){
 //                        int space=3-costs[i][j].length();
 //                        String sc="";

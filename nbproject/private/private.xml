@@ -5,9 +5,10 @@
         <group>
             <file>file:/C:/Users/lite/Documents/Github/PethFinder/src/ui/MainWindow.java</file>
             <file>file:/C:/Users/lite/Documents/Github/PethFinder/src/core/model/Mapa.java</file>
-            <file>file:/C:/Users/lite/Documents/Github/PethFinder/src/core/XMLReader.java</file>
+            <file>file:/C:/Users/lite/Documents/Github/PethFinder/src/ui/swing/webLaf/WeblafUtils.java</file>
             <file>file:/C:/Users/lite/Documents/Github/PethFinder/src/core/search/AStar.java</file>
             <file>file:/C:/Users/lite/Documents/Github/PethFinder/src/ui/swing/MapRenderer.java</file>
+            <file>file:/C:/Users/lite/Documents/Github/PethFinder/src/core/reader/XMLReader.java</file>
         </group>
     </open-files>
 </project-private>

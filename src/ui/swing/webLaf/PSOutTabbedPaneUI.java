@@ -3,8 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ui.webLaf;
-
+package ui.swing.webLaf;
 
 import java.awt.Graphics;
 import java.awt.Insets;
@@ -15,7 +14,7 @@ import ui.utils.ColorController;
  *
  * @author LITE
  */
-public class PSMainTabbedPaneUI extends BasicTabbedPaneUI {
+public class PSOutTabbedPaneUI extends BasicTabbedPaneUI {
 
     
 //    @Override
@@ -49,7 +48,7 @@ public class PSMainTabbedPaneUI extends BasicTabbedPaneUI {
         
         if ( tabPane.getTabCount() > 0) {
             // Fill region behind content area
-            g.setColor(ColorController.COR_PRINCIPAL);
+            g.setColor(ColorController.COR_DESTAQUE);
             g.fillRect(x,y,w,h);
         }
         
@@ -57,38 +56,24 @@ public class PSMainTabbedPaneUI extends BasicTabbedPaneUI {
 
     @Override
     protected void paintTabBorder(Graphics g, int tabPlacement, int tabIndex, int x, int y, int w, int h, boolean isSelected) {
-        
-        if(isSelected){
-            g.setColor(ColorController.COR_PRINCIPAL);
-            g.drawRect(rects[tabIndex].x, rects[tabIndex].y, rects[tabIndex].width, rects[tabIndex].height);
-        }
-        else{
-            g.setColor(ColorController.FUNDO_MEDIO);
-            g.drawRect(rects[tabIndex].x, rects[tabIndex].y, rects[tabIndex].width, rects[tabIndex].height);
-        }
+        g.setColor(ColorController.COR_DESTAQUE);
+        g.drawRect(rects[tabIndex].x, rects[tabIndex].y, rects[tabIndex].width, rects[tabIndex].height);
     }
     
     
     @Override
     protected void paintTabBackground(Graphics g, int tabPlacement, int tabIndex, int x, int y, int w, int h, boolean isSelected) {
-        if(tabIndex==0){
-            if(isSelected){
-                g.setColor(ColorController.COR_PRINCIPAL);
-                g.fillRect(rects[tabIndex].x, rects[tabIndex].y, rects[tabIndex].width, rects[tabIndex].height);
-            }else{
-                g.setColor(ColorController.FUNDO_MEDIO);
-                g.fillRect(rects[tabIndex].x, rects[tabIndex].y, rects[tabIndex].width, rects[tabIndex].height);
-            }
+        if(isSelected){
+            g.setColor(ColorController.COR_DESTAQUE);
+            g.fillRect(rects[tabIndex].x, rects[tabIndex].y, rects[tabIndex].width, rects[tabIndex].height);
+            g.drawRect(rects[tabIndex].x, rects[tabIndex].y, rects[tabIndex].width, rects[tabIndex].height);
         }else{
-            if(isSelected){
-                g.setColor(ColorController.COR_PRINCIPAL);
-                g.fillRect(rects[tabIndex].x, rects[tabIndex].y, rects[tabIndex].width, rects[tabIndex].height);
-            }else{
-                g.setColor(ColorController.COR_DESTAQUE);
-                g.fillRect(rects[tabIndex].x, rects[tabIndex].y, rects[tabIndex].width, rects[tabIndex].height);
-            }
+            g.setColor(ColorController.COR_PRINCIPAL);
+            g.fillRect(rects[tabIndex].x, rects[tabIndex].y, rects[tabIndex].width, rects[tabIndex].height);
+            g.drawRect(rects[tabIndex].x, rects[tabIndex].y, rects[tabIndex].width, rects[tabIndex].height);
         }
         
     }
     
 }
+

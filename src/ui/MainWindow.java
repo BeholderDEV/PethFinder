@@ -5,8 +5,8 @@
  */
 package ui;
 
-import core.PFReader;
-import core.XMLReader;
+import core.reader.PFReader;
+import core.reader.XMLReader;
 import core.model.Mapa;
 import core.search.AStar;
 import java.awt.Color;
@@ -17,8 +17,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import ui.swing.MapRenderer;
 import ui.utils.ColorController;
-import ui.webLaf.PSOutTabbedPaneUI;
-import ui.webLaf.WeblafUtils;
+import ui.swing.webLaf.PSOutTabbedPaneUI;
+import ui.swing.webLaf.WeblafUtils;
 
 /**
  *
@@ -67,6 +67,7 @@ public class MainWindow extends javax.swing.JFrame {
         webButton2 = new com.alee.laf.button.WebButton();
         jPanel2 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
+        webButton6 = new com.alee.laf.button.WebButton();
         jComboBox1 = new javax.swing.JComboBox<>();
         webButton1 = new com.alee.laf.button.WebButton();
         webButton4 = new com.alee.laf.button.WebButton();
@@ -120,6 +121,9 @@ public class MainWindow extends javax.swing.JFrame {
 
         jPanel5.setOpaque(false);
         jPanel5.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
+
+        webButton6.setText("Rotinas");
+        jPanel5.add(webButton6);
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Raio", "Gulosa" }));
         jPanel5.add(jComboBox1);
@@ -258,5 +262,6 @@ public class MainWindow extends javax.swing.JFrame {
     private com.alee.laf.button.WebButton webButton3;
     private com.alee.laf.button.WebButton webButton4;
     private com.alee.laf.button.WebButton webButton5;
+    private com.alee.laf.button.WebButton webButton6;
     // End of variables declaration//GEN-END:variables
 }

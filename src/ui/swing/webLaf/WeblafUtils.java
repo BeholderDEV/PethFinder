@@ -1,4 +1,4 @@
-package ui.webLaf;
+package ui.swing.webLaf;
 
 import com.alee.global.StyleConstants;
 import com.alee.laf.WebLookAndFeel;
