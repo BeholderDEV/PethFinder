@@ -8,9 +8,11 @@ package ui;
 import core.reader.PFReader;
 import core.reader.XMLReader;
 import core.model.Mapa;
+import core.reader.PFPReader;
 import core.search.AStar;
 import java.awt.Color;
 import java.awt.Image;
+import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
@@ -123,6 +125,11 @@ public class MainWindow extends javax.swing.JFrame {
         jPanel5.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
 
         webButton6.setText("Rotinas");
+        webButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                webButton6ActionPerformed(evt);
+            }
+        });
         jPanel5.add(webButton6);
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Raio", "Gulosa" }));
@@ -201,13 +208,22 @@ public class MainWindow extends javax.swing.JFrame {
         if(mapa!=null){
             mapa.setPathMatrix(AStar.getInstance().getPath(mapa,jComboBox1.getSelectedItem().toString()));
             jTextArea1.setText(AStar.getInstance().getConsoleLog());
-            TableModel model = new DefaultTableModel(AStar.getInstance().getCosts(), new String[]{" - "," - "," - "," - "," - "," - "," - "," - "," - "," - "," - "," - "," - "," - "," - "});
             if(mapa.getPathMatrix()!=null){
                 Image image= MapRenderer.getInstance().getPathedImage(mapa);
                 jLabel1.setIcon(new ImageIcon(image));
             }
         }
     }//GEN-LAST:event_webButton5ActionPerformed
+
+    private void webButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_webButton6ActionPerformed
+        List<Mapa> mapas = PFPReader.lerPFP(100);
+        String string = "";
+        for (Mapa mapa1 : mapas) {
+            mapa1.setPathMatrix(AStar.getInstance().getPath(mapa1,jComboBox1.getSelectedItem().toString()));
+            string =  string.concat(AStar.getInstance().getIterations()+"\n");
+        }
+        System.out.println(string);
+    }//GEN-LAST:event_webButton6ActionPerformed
 
     /**
      * @param args the command line arguments

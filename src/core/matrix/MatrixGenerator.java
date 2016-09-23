@@ -71,7 +71,10 @@ public class MatrixGenerator {
     }
     
     public static void main(String[] args) {
-        MatrixGenerator generator = new MatrixGenerator(15);
-        System.out.println(generator.getMatrixText());
+        for(int i=0;i<100;i++){
+            MatrixGenerator generator = new MatrixGenerator(15);
+            System.out.println(generator.getMatrixText());
+        }
+        
     }
 }

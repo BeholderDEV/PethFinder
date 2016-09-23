@@ -22,6 +22,7 @@ public class AStar {
     public final int DIAGONAL_COST = 14;
     public final int V_H_COST = 10;
     
+    
     //Blocked cells are just null Cell values in grid
     static Cell [][] grid = new Cell[5][5];
     
@@ -80,6 +81,11 @@ public class AStar {
     public String getConsoleLog() {
         return consoleLog;
     }
+    public int getIterations() {
+        return iterations;
+    }
+    
+    
     
     public static AStar getInstance() {
         if(aStar==null){
@@ -88,6 +94,7 @@ public class AStar {
         return aStar;
     }
     private void calculateGuloso(){
+        iterations=0;
         open.add(grid[startI][startJ]);
         
         Cell current;
@@ -145,6 +152,7 @@ public class AStar {
         } 
     }
     private void calculateRaio(){
+        iterations=0;
         open.add(grid[startI][startJ]);
         
         Cell current;
@@ -286,7 +294,7 @@ public class AStar {
              } 
              consoleLog = consoleLog.concat("\n");
              consoleLog = consoleLog.concat("Iterationr: "+iterations);
-             iterations=0;
+             
              return path;
         }else{
             consoleLog = consoleLog.concat("No possible path");
