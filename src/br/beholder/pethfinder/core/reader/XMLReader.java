@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package core.reader;
+package br.beholder.pethfinder.core.reader;
 
-import core.model.Mapa;
+import br.beholder.pethfinder.core.model.Mapa;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.io.File;

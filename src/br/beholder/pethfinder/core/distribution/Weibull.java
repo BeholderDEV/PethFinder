@@ -3,12 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package core.distribution;
+package br.beholder.pethfinder.core.distribution;
 
 import java.util.Random;
 import org.apache.commons.math3.distribution.WeibullDistribution;
-import org.apache.commons.math3.random.RandomDataGenerator;
-import org.apache.commons.math3.random.RandomGenerator;
 
 /**
  *
@@ -23,14 +21,16 @@ public class Weibull {
     }
     
     
-    public static void main(String[] args) {
+    public static String getSimulation() {
         
         WeibullDistribution distribution = new WeibullDistribution(alp, lam);
         Double number;
+        String s ="";
         for(int i=0;i<100;i++){
             number = 2+distribution.sample();
-            System.out.println(number.intValue());
+            s = s.concat(number.intValue()+"\n");
         }
+        return s;
     }
     
 }

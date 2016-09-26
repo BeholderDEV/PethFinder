@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package core.model;
+package br.beholder.pethfinder.core.model;
 
 import java.awt.Point;
 

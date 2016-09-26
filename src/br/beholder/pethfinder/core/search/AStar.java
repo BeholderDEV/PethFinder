@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package core.search;
+package br.beholder.pethfinder.core.search;
 
 import com.bethecoder.ascii_table.ASCIITable;
-import core.model.Cell;
-import core.model.Mapa;
+import br.beholder.pethfinder.core.model.Cell;
+import br.beholder.pethfinder.core.model.Mapa;
 import java.util.PriorityQueue;
 
 /**

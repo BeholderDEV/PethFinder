@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ui.swing;
+package br.beholder.pethfinder.ui.swing;
 
-import core.model.Mapa;
+import br.beholder.pethfinder.core.model.Mapa;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -31,8 +31,8 @@ public class MapRenderer extends JComponent{
 
     private MapRenderer() {
         try {
-            tile_set =  ImageIO.read(getClass().getResource("/ui/resources/tileset.png"));
-            cat_sprite =  ImageIO.read(getClass().getResource("/ui/resources/cat.png"));
+            tile_set =  ImageIO.read(getClass().getResource("/br/beholder/pethfinder/ui/resources/tileset.png"));
+            cat_sprite =  ImageIO.read(getClass().getResource("/br/beholder/pethfinder/ui/resources/cat.png"));
             observer= new ImageObserver() {
                 @Override
                 public boolean imageUpdate(Image img, int infoflags, int x, int y, int width, int height) {

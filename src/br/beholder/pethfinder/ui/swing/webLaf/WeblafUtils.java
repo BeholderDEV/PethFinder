@@ -1,4 +1,4 @@
-package ui.swing.webLaf;
+package br.beholder.pethfinder.ui.swing.webLaf;
 
 import com.alee.global.StyleConstants;
 import com.alee.laf.WebLookAndFeel;
@@ -27,7 +27,7 @@ import java.awt.event.MouseEvent;
 import java.util.Locale;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import ui.utils.ColorController;
+import br.beholder.pethfinder.ui.utils.ColorController;
 
 /**
  *

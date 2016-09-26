@@ -3,12 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/lite/Documents/Github/PethFinder/src/core/reader/PFReader.java</file>
-            <file>file:/C:/Users/lite/Documents/Github/PethFinder/src/core/distribution/Weibull.java</file>
-            <file>file:/C:/Users/lite/Documents/Github/PethFinder/src/ui/MainWindow.java</file>
-            <file>file:/C:/Users/lite/Documents/Github/PethFinder/src/core/reader/PFPReader.java</file>
-            <file>file:/C:/Users/lite/Documents/Github/PethFinder/src/core/model/Mapa.java</file>
-            <file>file:/C:/Users/lite/Documents/Github/PethFinder/src/core/search/AStar.java</file>
+            <file>file:/C:/Users/lite/Documents/Github/PethFinder/src/br/beholder/pethfinder/ui/MainPanel.java</file>
+            <file>file:/C:/Users/lite/Documents/Github/PethFinder/src/br/beholder/pethfinder/ui/window/BorderPanel.java</file>
+            <file>file:/C:/Users/lite/Documents/Github/PethFinder/src/br/beholder/pethfinder/ui/window/OutsidePanel.java</file>
+            <file>file:/C:/Users/lite/Documents/Github/PethFinder/src/br/beholder/pethfinder/Lancador.java</file>
+            <file>file:/C:/Users/lite/Documents/Github/PethFinder/src/br/beholder/pethfinder/ui/window/ComponentResizer.java</file>
         </group>
     </open-files>
 </project-private>

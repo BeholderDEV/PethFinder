@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ui.swing.webLaf;
+package br.beholder.pethfinder.ui.swing.webLaf;
 
 import java.awt.Graphics;
 import java.awt.Insets;
 import javax.swing.plaf.basic.BasicTabbedPaneUI;
-import ui.utils.ColorController;
+import br.beholder.pethfinder.ui.utils.ColorController;
 
 /**
  *
