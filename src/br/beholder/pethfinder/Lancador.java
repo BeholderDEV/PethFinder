@@ -32,6 +32,8 @@ public class Lancador {
     
     private static final ExecutorService service = Executors.newCachedThreadPool();
     private static JFrame frame = new JFrame();
+    private static Dimension older_size;
+    private static boolean maximazed=false;
     private MainPanel mainWindow;
     private final static Lancador application = new Lancador();
     
@@ -40,6 +42,22 @@ public class Lancador {
      */
     public static void main(String args[]) {
         Lancador.getInstance().start();
+    }
+
+    public static Dimension getOlder_size() {
+        return older_size;
+    }
+
+    public static void setOlder_size(Dimension older_size) {
+        Lancador.older_size = older_size;
+    }
+
+    public static boolean isMaximazed() {
+        return maximazed;
+    }
+
+    public static void setMaximazed(boolean maximazed) {
+        Lancador.maximazed = maximazed;
     }
     
     public static JFrame getJFrame(){

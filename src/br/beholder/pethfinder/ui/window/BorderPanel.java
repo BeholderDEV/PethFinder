@@ -13,6 +13,7 @@ import com.alee.laf.button.WebButton;
 import com.alee.utils.swing.MouseEventRunnable;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
@@ -39,8 +40,8 @@ public class BorderPanel extends JPanel {
         
         private WebButton closeButton;
         private Image close;
-        private WebButton resizeButton;
-        private Image resize;
+        private WebButton maxButton;
+        private Image max;
         private WebButton minButton;
         private Image min;
         private Image icon;
@@ -50,6 +51,7 @@ public class BorderPanel extends JPanel {
             
             try {
                 close = ImageIO.read(getClass().getResource("/br/beholder/pethfinder/ui/resources/window_close.png"));
+                max = ImageIO.read(getClass().getResource("/br/beholder/pethfinder/ui/resources/window_max.png"));
                 min = ImageIO.read(getClass().getResource("/br/beholder/pethfinder/ui/resources/window_min.png"));
                 icon = ImageIO.read(getClass().getResource("/br/beholder/pethfinder/ui/resources/icon32.png"));
             } catch (IOException ex) {
@@ -88,12 +90,32 @@ public class BorderPanel extends JPanel {
                     Lancador.getJFrame().setExtendedState(JFrame.ICONIFIED);
                 }
             });
+            maxButton=new WebButton();
+            maxButton.setIcon(new ImageIcon(max));
+            maxButton.onMouseClick(new MouseEventRunnable() {
+                @Override
+                public void run(MouseEvent me) {
+                    if(Lancador.isMaximazed()){
+                        Dimension d = Lancador.getOlder_size();
+                        Lancador.getJFrame().setExtendedState(JFrame.NORMAL);
+                        Lancador.getJFrame().setSize(d);
+                        Lancador.setMaximazed(false);
+                    }else{
+                        Dimension d = Lancador.getJFrame().getSize();
+                        Lancador.setOlder_size(d);
+                        Lancador.getJFrame().setExtendedState(JFrame.MAXIMIZED_BOTH);
+                        Lancador.setMaximazed(true);
+                    }
+                }
+            });
             
             
             WeblafUtils.configurarBotao(closeButton, ColorController.FUNDO_ESCURO, ColorController.COR_LETRA,ColorController.PROGRESS_BAR, Color.orange, 5);
             WeblafUtils.configurarBotao(minButton, ColorController.FUNDO_ESCURO, ColorController.COR_LETRA,ColorController.COR_PRINCIPAL, Color.orange, 5);
+            WeblafUtils.configurarBotao(maxButton, ColorController.FUNDO_ESCURO, ColorController.COR_LETRA,ColorController.COR_PRINCIPAL, Color.orange, 5);
             
             buttonsPanel.add(minButton);
+            buttonsPanel.add(maxButton);
             buttonsPanel.add(closeButton);
             
             
