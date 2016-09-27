@@ -80,9 +80,23 @@ public class BorderPanel extends JPanel {
                     System.exit(0);
                 }
             });
+            minButton=new WebButton();
+            minButton.setIcon(new ImageIcon(min));
+            minButton.onMouseClick(new MouseEventRunnable() {
+                @Override
+                public void run(MouseEvent me) {
+                    Lancador.getJFrame().setExtendedState(JFrame.ICONIFIED);
+                }
+            });
             
-            WeblafUtils.configurarBotao(closeButton, ColorController.COR_PRINCIPAL, ColorController.COR_LETRA,ColorController.PROGRESS_BAR, Color.orange, 5);
+            
+            WeblafUtils.configurarBotao(closeButton, ColorController.FUNDO_ESCURO, ColorController.COR_LETRA,ColorController.PROGRESS_BAR, Color.orange, 5);
+            WeblafUtils.configurarBotao(minButton, ColorController.FUNDO_ESCURO, ColorController.COR_LETRA,ColorController.COR_PRINCIPAL, Color.orange, 5);
+            
+            buttonsPanel.add(minButton);
             buttonsPanel.add(closeButton);
+            
+            
             add(iconPanel, BorderLayout.WEST);
             add(textPanel, BorderLayout.CENTER);
             add(buttonsPanel, BorderLayout.EAST);
