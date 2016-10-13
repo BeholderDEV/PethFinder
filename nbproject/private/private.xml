@@ -4,10 +4,12 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/lite/Documents/Github/PethFinder/src/br/beholder/pethfinder/ui/MainPanel.java</file>
-            <file>file:/C:/Users/lite/Documents/Github/PethFinder/src/br/beholder/pethfinder/ui/window/BorderPanel.java</file>
-            <file>file:/C:/Users/lite/Documents/Github/PethFinder/src/br/beholder/pethfinder/ui/window/OutsidePanel.java</file>
-            <file>file:/C:/Users/lite/Documents/Github/PethFinder/src/br/beholder/pethfinder/Lancador.java</file>
-            <file>file:/C:/Users/lite/Documents/Github/PethFinder/src/br/beholder/pethfinder/ui/window/ComponentResizer.java</file>
+            <file>file:/C:/Users/lite/Documents/Github/PethFinder/src/br/beholder/pethfinder/core/reader/XMLReader.java</file>
+            <file>file:/C:/Users/lite/Documents/Github/PethFinder/src/br/beholder/pethfinder/control/NormalPathController.java</file>
+            <file>file:/C:/Users/lite/Documents/Github/PethFinder/src/br/beholder/pethfinder/core/model/Cell.java</file>
+            <file>file:/C:/Users/lite/Documents/Github/PethFinder/src/br/beholder/pethfinder/core/search/AStar.java</file>
+            <file>file:/C:/Users/lite/Documents/Github/PethFinder/src/br/beholder/pethfinder/ui/swing/MapRenderer.java</file>
+            <file>file:/C:/Users/lite/Documents/Github/PethFinder/src/br/beholder/pethfinder/core/model/Mapa.java</file>
         </group>
     </open-files>
 </project-private>

@@ -53,9 +53,19 @@ public class MapRenderer extends JComponent{
     }
     
     public Image getFirstImage(Mapa mapa) {
+        int maxcx = mapa.getMatrix()[0].length*tile_size/2;
+        int maxcy = mapa.getMatrix().length*tile_size/2;
+        int maxix = maxcx - maxcy;
+        int maxiy = Math.round((maxcx + maxcy) / 2f);
+        int alt = maxiy+tile_size;
+        maxcx = mapa.getMatrix()[0].length*tile_size/2;
+        maxcy = 0*tile_size/2;
+        maxix = maxcx - maxcy;
+        maxiy = Math.round((maxcx + maxcy) / 2f);
+        base = mapa.getMatrix()[0].length*tile_size/2;
+        int larg = base+maxix+tile_size;
+        BufferedImage bi = new BufferedImage(larg,alt, BufferedImage.TYPE_4BYTE_ABGR);
         
-        BufferedImage bi = new BufferedImage((mapa.getMatrix()[0].length+1)*tile_size, (mapa.getMatrix().length+1)*((3*tile_size)/4), BufferedImage.TYPE_4BYTE_ABGR);
-        base = mapa.getMatrix().length*tile_size/2;
         Graphics2D g2d = (Graphics2D) bi.getGraphics();
         
         g2d.setColor(Color.DARK_GRAY);
@@ -83,9 +93,18 @@ public class MapRenderer extends JComponent{
         return bi;
     }
     public Image getStepImage(Mapa mapa, boolean [][] closed) {
-        
-        BufferedImage bi = new BufferedImage((mapa.getMatrix()[0].length+1)*tile_size, (mapa.getMatrix().length+1)*((3*tile_size)/4), BufferedImage.TYPE_4BYTE_ABGR);
-        base = mapa.getMatrix().length*tile_size/2;
+        int maxcx = mapa.getMatrix()[0].length*tile_size/2;
+        int maxcy = mapa.getMatrix().length*tile_size/2;
+        int maxix = maxcx - maxcy;
+        int maxiy = Math.round((maxcx + maxcy) / 2f);
+        int alt = maxiy+tile_size;
+        maxcx = mapa.getMatrix()[0].length*tile_size/2;
+        maxcy = 0*tile_size/2;
+        maxix = maxcx - maxcy;
+        maxiy = Math.round((maxcx + maxcy) / 2f);
+        base = mapa.getMatrix()[0].length*tile_size/2;
+        int larg = base+maxix+tile_size;
+        BufferedImage bi = new BufferedImage(larg,alt, BufferedImage.TYPE_4BYTE_ABGR);
         Graphics2D g2d = (Graphics2D) bi.getGraphics();
         
         g2d.setColor(Color.DARK_GRAY);
@@ -116,9 +135,18 @@ public class MapRenderer extends JComponent{
         return bi;
     }
     public Image getPathedImage(Mapa mapa) {
-        
-        BufferedImage bi = new BufferedImage((mapa.getMatrix()[0].length+1)*tile_size, (mapa.getMatrix().length+1)*((3*tile_size)/4), BufferedImage.TYPE_4BYTE_ABGR);
-        base = mapa.getMatrix().length*tile_size/2;
+        int maxcx = mapa.getMatrix()[0].length*tile_size/2;
+        int maxcy = mapa.getMatrix().length*tile_size/2;
+        int maxix = maxcx - maxcy;
+        int maxiy = Math.round((maxcx + maxcy) / 2f);
+        int alt = maxiy+tile_size;
+        maxcx = mapa.getMatrix()[0].length*tile_size/2;
+        maxcy = 0*tile_size/2;
+        maxix = maxcx - maxcy;
+        maxiy = Math.round((maxcx + maxcy) / 2f);
+        base = mapa.getMatrix()[0].length*tile_size/2;
+        int larg = base+maxix+tile_size;
+        BufferedImage bi = new BufferedImage(larg,alt, BufferedImage.TYPE_4BYTE_ABGR);
         Graphics2D g2d = (Graphics2D) bi.getGraphics();
         
         g2d.setColor(Color.DARK_GRAY);
