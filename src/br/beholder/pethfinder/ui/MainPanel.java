@@ -51,42 +51,24 @@ public class MainPanel extends javax.swing.JPanel {
         WeblafUtils.configuraWebLaf(webComboBox1);
         WeblafUtils.configuraWeblaf(jPanel2);
         WeblafUtils.configuraWebLaf(jTextArea1);
-        WeblafUtils.configuraWebLaf(jTextArea2);
-        WeblafUtils.configuraWebLaf(jTextArea3);
-        WeblafUtils.configuraWebLaf(jTextArea4);
-        WeblafUtils.configuraWebLaf(jTextArea5);
-        WeblafUtils.configuraWebLaf(jTextArea6);
         
         WeblafUtils.configuraWebLaf(jScrollPane1);
-        WeblafUtils.configuraWebLaf(jScrollPane2);
-        WeblafUtils.configuraWebLaf(jScrollPane3);
-        WeblafUtils.configuraWebLaf(jScrollPane4);
-        WeblafUtils.configuraWebLaf(jScrollPane5);
-        WeblafUtils.configuraWebLaf(jScrollPane6);
         
         jTabbedPane1.setUI(new PSOutTabbedPaneUI());
-        jTabbedPane2.setUI(new PSOutTabbedPaneUI());
         
         WeblafUtils.configurarBotao(webButton5, ColorController.COR_DESTAQUE, ColorController.COR_LETRA);
         WeblafUtils.configurarBotao(webButton4, ColorController.COR_DESTAQUE, ColorController.COR_LETRA);
         WeblafUtils.configurarBotao(webButton1, ColorController.COR_DESTAQUE, ColorController.COR_LETRA);
-//        WeblafUtils.configurarBotao(webButton6, ColorController.COR_DESTAQUE, ColorController.COR_LETRA);
-        WeblafUtils.configurarBotao(webButton2, ColorController.COR_DESTAQUE, ColorController.COR_LETRA);
-        WeblafUtils.configurarBotao(webButton3, ColorController.COR_DESTAQUE, ColorController.COR_LETRA);
-        WeblafUtils.configurarBotao(webButton7, ColorController.COR_DESTAQUE, ColorController.COR_LETRA);
         
 //        WeblafUtils.configurarBotao(webButton3, ColorController.COR_PRINCIPAL, ColorController.COR_LETRA,ColorController.FUNDO_CLARO, Color.orange, 5);
         
-        jPanel1.setBackground(ColorController.FUNDO_ESCURO);
         jPanel2.setBackground(ColorController.COR_PRINCIPAL);
         jPanel7.setBackground(ColorController.COR_PRINCIPAL);
         jTextArea1.setBackground(ColorController.COR_PRINCIPAL);
-        jPanel1.setBackground(ColorController.COR_PRINCIPAL);
         setBackground(ColorController.COR_PRINCIPAL);
         jTextArea1.setForeground(ColorController.COR_LETRA);
 //        jPanel3.setBackground(ColorController.COR_PRINCIPAL); 
         jTabbedPane1.setForeground(ColorController.COR_LETRA);        
-        jTabbedPane2.setForeground(ColorController.COR_LETRA);        
     }
 
     /**
@@ -98,24 +80,6 @@ public class MainPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
-        webButton2 = new com.alee.laf.button.WebButton();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        jTextArea5 = new javax.swing.JTextArea();
-        jPanel4 = new javax.swing.JPanel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea3 = new javax.swing.JTextArea();
-        webButton3 = new com.alee.laf.button.WebButton();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        jTextArea6 = new javax.swing.JTextArea();
-        jPanel6 = new javax.swing.JPanel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jTextArea4 = new javax.swing.JTextArea();
-        webButton7 = new com.alee.laf.button.WebButton();
-        jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         webButton8 = new com.alee.laf.button.WebButton();
@@ -128,77 +92,6 @@ public class MainPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jPanel7 = new javax.swing.JPanel();
-
-        jPanel1.setLayout(new java.awt.BorderLayout(5, 0));
-
-        jPanel3.setOpaque(false);
-        jPanel3.setLayout(new java.awt.BorderLayout(5, 5));
-
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jScrollPane2.setViewportView(jTextArea2);
-
-        jPanel3.add(jScrollPane2, java.awt.BorderLayout.CENTER);
-
-        webButton2.setText("Gerar Matrizes");
-        webButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                webButton2ActionPerformed(evt);
-            }
-        });
-        jPanel3.add(webButton2, java.awt.BorderLayout.PAGE_START);
-
-        jTextArea5.setColumns(20);
-        jTextArea5.setRows(5);
-        jScrollPane5.setViewportView(jTextArea5);
-
-        jPanel3.add(jScrollPane5, java.awt.BorderLayout.LINE_END);
-
-        jPanel1.add(jPanel3, java.awt.BorderLayout.WEST);
-
-        jPanel4.setOpaque(false);
-        jPanel4.setLayout(new java.awt.BorderLayout(5, 5));
-
-        jTextArea3.setColumns(20);
-        jTextArea3.setRows(5);
-        jScrollPane3.setViewportView(jTextArea3);
-
-        jPanel4.add(jScrollPane3, java.awt.BorderLayout.CENTER);
-
-        webButton3.setText("Gerar Caminhos");
-        webButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                webButton3ActionPerformed(evt);
-            }
-        });
-        jPanel4.add(webButton3, java.awt.BorderLayout.PAGE_START);
-
-        jTextArea6.setColumns(20);
-        jTextArea6.setRows(5);
-        jScrollPane6.setViewportView(jTextArea6);
-
-        jPanel4.add(jScrollPane6, java.awt.BorderLayout.LINE_END);
-
-        jPanel1.add(jPanel4, java.awt.BorderLayout.CENTER);
-
-        jPanel6.setOpaque(false);
-        jPanel6.setLayout(new java.awt.BorderLayout(5, 5));
-
-        jTextArea4.setColumns(20);
-        jTextArea4.setRows(5);
-        jScrollPane4.setViewportView(jTextArea4);
-
-        jPanel6.add(jScrollPane4, java.awt.BorderLayout.CENTER);
-
-        webButton7.setText("Simular");
-        webButton7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                webButton7ActionPerformed(evt);
-            }
-        });
-        jPanel6.add(webButton7, java.awt.BorderLayout.PAGE_START);
-
-        jPanel1.add(jPanel6, java.awt.BorderLayout.EAST);
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         setLayout(new java.awt.BorderLayout());
@@ -265,9 +158,7 @@ public class MainPanel extends javax.swing.JPanel {
 
         jPanel2.add(jSplitPane1, java.awt.BorderLayout.CENTER);
 
-        jTabbedPane2.addTab("Teste Único", jPanel2);
-
-        add(jTabbedPane2, java.awt.BorderLayout.CENTER);
+        add(jPanel2, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
     
     public JPanel getImagePane(){
@@ -294,77 +185,22 @@ public class MainPanel extends javax.swing.JPanel {
         controller.calculate();
     }//GEN-LAST:event_webButton5ActionPerformed
 
-    private void webButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_webButton2ActionPerformed
-        String s="";
-        for(int i=0;i<100;i++){
-            MatrixGenerator generator = new MatrixGenerator(15);
-            s = s.concat(generator.getMatrixText());
-        }
-        jTextArea2.setText(s);
-        s="";
-        for(int i=0;i<100;i++){
-            MatrixGenerator generator = new MatrixGenerator(15);
-            s = s.concat(generator.getMatrixText());
-        }
-        jTextArea5.setText(s);
-    }//GEN-LAST:event_webButton2ActionPerformed
-
-    private void webButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_webButton3ActionPerformed
-        List<Mapa> mapas = PFPReader.lerTextArea(jTextArea2.getText(), 100);
-        String string = "";
-        for (Mapa mapa1 : mapas) {
-            mapa1.setPathMatrix(AStar.getInstance().getPath(mapa1,"Gulosa",false));
-            string =  string.concat(AStar.getInstance().getIterations()+"\n");
-        }
-        jTextArea3.setText(string);
-        string = "";
-        mapas = PFPReader.lerTextArea(jTextArea5.getText(), 100);
-        for (Mapa mapa1 : mapas) {
-            mapa1.setPathMatrix(AStar.getInstance().getPath(mapa1,"Gulosa",false));
-            string =  string.concat(AStar.getInstance().getIterations()+"\n");
-        }
-        jTextArea6.setText(string);
-    }//GEN-LAST:event_webButton3ActionPerformed
-
-    private void webButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_webButton7ActionPerformed
-        jTextArea4.setText(Weibull.getSimulation());
-    }//GEN-LAST:event_webButton7ActionPerformed
-
     private void webButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_webButton8ActionPerformed
-        controller.setTipo(webComboBox1.getSelectedItem().toString());
-        
+        controller.setTipo(webComboBox1.getSelectedItem().toString());        
     }//GEN-LAST:event_webButton8ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea2;
-    private javax.swing.JTextArea jTextArea3;
-    private javax.swing.JTextArea jTextArea4;
-    private javax.swing.JTextArea jTextArea5;
-    private javax.swing.JTextArea jTextArea6;
     private com.alee.laf.button.WebButton webButton1;
-    private com.alee.laf.button.WebButton webButton2;
-    private com.alee.laf.button.WebButton webButton3;
     private com.alee.laf.button.WebButton webButton4;
     private com.alee.laf.button.WebButton webButton5;
-    private com.alee.laf.button.WebButton webButton7;
     private com.alee.laf.button.WebButton webButton8;
     private com.alee.laf.combobox.WebComboBox webComboBox1;
     // End of variables declaration//GEN-END:variables
