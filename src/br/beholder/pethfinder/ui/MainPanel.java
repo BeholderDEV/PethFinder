@@ -50,6 +50,7 @@ public class MainPanel extends javax.swing.JPanel {
         WeblafUtils.instalaWeblaf();
         WeblafUtils.configuraWebLaf(webComboBox1);
         WeblafUtils.configuraWeblaf(jPanel2);
+        WeblafUtils.configuraWebLaf(jTextField1);
         WeblafUtils.configuraWebLaf(jTextArea1);
         
         WeblafUtils.configuraWebLaf(jScrollPane1);
@@ -59,6 +60,7 @@ public class MainPanel extends javax.swing.JPanel {
         WeblafUtils.configurarBotao(webButton5, ColorController.COR_DESTAQUE, ColorController.COR_LETRA);
         WeblafUtils.configurarBotao(webButton4, ColorController.COR_DESTAQUE, ColorController.COR_LETRA);
         WeblafUtils.configurarBotao(webButton1, ColorController.COR_DESTAQUE, ColorController.COR_LETRA);
+        WeblafUtils.configurarBotao(webButton8, ColorController.COR_DESTAQUE, ColorController.COR_LETRA);
         
 //        WeblafUtils.configurarBotao(webButton3, ColorController.COR_PRINCIPAL, ColorController.COR_LETRA,ColorController.FUNDO_CLARO, Color.orange, 5);
         
@@ -82,6 +84,7 @@ public class MainPanel extends javax.swing.JPanel {
 
         jPanel2 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
+        jTextField1 = new javax.swing.JTextField();
         webButton8 = new com.alee.laf.button.WebButton();
         webComboBox1 = new com.alee.laf.combobox.WebComboBox();
         webButton1 = new com.alee.laf.button.WebButton();
@@ -103,6 +106,9 @@ public class MainPanel extends javax.swing.JPanel {
 
         jPanel5.setOpaque(false);
         jPanel5.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
+
+        jTextField1.setText("100");
+        jPanel5.add(jTextField1);
 
         webButton8.setText("Passo a Passo");
         webButton8.addActionListener(new java.awt.event.ActionListener() {
@@ -169,6 +175,10 @@ public class MainPanel extends javax.swing.JPanel {
         return jTextArea1;
     }
     
+    public Integer getTime(){
+        return Integer.parseInt(jTextField1.getText());
+    }
+    
     public String getCalcType(){
         return webComboBox1.getSelectedItem().toString();
     }
@@ -186,7 +196,8 @@ public class MainPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_webButton5ActionPerformed
 
     private void webButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_webButton8ActionPerformed
-        controller.setTipo(webComboBox1.getSelectedItem().toString());        
+        controller.setTipo(webComboBox1.getSelectedItem().toString()); 
+        controller.calculateStep();
     }//GEN-LAST:event_webButton8ActionPerformed
 
 
@@ -198,6 +209,7 @@ public class MainPanel extends javax.swing.JPanel {
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextField jTextField1;
     private com.alee.laf.button.WebButton webButton1;
     private com.alee.laf.button.WebButton webButton4;
     private com.alee.laf.button.WebButton webButton5;

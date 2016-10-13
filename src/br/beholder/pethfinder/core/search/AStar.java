@@ -10,6 +10,8 @@ import com.bethecoder.ascii_table.ASCIITable;
 import br.beholder.pethfinder.core.model.Cell;
 import br.beholder.pethfinder.core.model.Mapa;
 import java.util.PriorityQueue;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -20,8 +22,10 @@ public class AStar {
     private String consoleLog = "";
     private String[][] costs;
     private int iterations=0;
+    private static int delay = 100;
     public final int DIAGONAL_COST = 14;
     public final int V_H_COST = 10;
+    private boolean stepByStep = false;
     private NormalPathController controller;
     
     //Blocked cells are just null Cell values in grid
@@ -32,7 +36,10 @@ public class AStar {
     static boolean closed[][];
     static int startI, startJ;
     static int endI, endJ;
-            
+     
+    public static void setDelay(int del){
+        delay = del;
+    }
     public static void setBlocked(int i, int j){
         grid[i][j] = null;
     }
@@ -150,6 +157,14 @@ public class AStar {
                     checkAndUpdateCostGuloso(current, t, current.getFinalCost()+DIAGONAL_COST); 
                 }  
             }
+            if(stepByStep){
+                controller.stepImage(closed);
+                try {
+                    Thread.sleep(delay);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(AStar.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         } 
     }
     private void calculateRaio(){
@@ -208,6 +223,14 @@ public class AStar {
                     checkAndUpdateCostRaio(current, t, current.getFinalCost()+DIAGONAL_COST); 
                 }  
             }
+            if(stepByStep){
+                controller.stepImage(closed);
+                try {
+                    Thread.sleep(delay);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(AStar.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         } 
     }
     
@@ -224,9 +247,10 @@ public class AStar {
     int[][] blocked = array containing inaccessible cell coordinates
     */
     public boolean[][] getPath(Mapa mapa, String tipo, boolean stepByStep){
+        this.stepByStep = stepByStep;
         consoleLog="";
-        int x= mapa.getTamanho().width;
-        int y= mapa.getTamanho().height;
+        int x= mapa.getTamanho().height;
+        int y= mapa.getTamanho().width;
         int si = mapa.getPontoInicial().y;
         int sj = mapa.getPontoInicial().x;
         int ei = mapa.getPontoFinal().y;
@@ -266,14 +290,6 @@ public class AStar {
             for(int j=0;j<y;++j){
                 if(grid[i][j]!=null){
                     costs[i][j] = "[f:"+grid[i][j].getFinalCost()+" | h:"+grid[i][j].getHeuristicCost()+"]";
-//                    if(costs[i][j].length()<3){
-//                        int space=3-costs[i][j].length();
-//                        String sc="";
-//                        for (int k = 0; k < space; k++) {
-//                            sc=sc.concat("0");
-//                        }
-//                        costs[i][j] = sc.concat(costs[i][j]);
-//                    }
                 }
                 else{
                     costs[i][j]= "BL";
@@ -283,9 +299,9 @@ public class AStar {
         consoleLog = consoleLog.concat(ASCIITable.getInstance().getTable(new String[] {}, costs));
         if(closed[endI][endJ]){
             //Trace back the path 
-             boolean[][] path = new boolean[y][x];
-             for(int i=0;i<y;++i){
-                 for(int j=0;j<x;++j){
+             boolean[][] path = new boolean[x][y];
+             for(int i=0;i<x;++i){
+                 for(int j=0;j<y;++j){
                      path[i][j]=false;
                  }
              }
