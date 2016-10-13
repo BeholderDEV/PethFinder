@@ -5,7 +5,7 @@
  */
 package br.beholder.pethfinder.ui;
 
-import br.beholder.pethfinder.control.StepByStepPathController;
+import br.beholder.pethfinder.control.NormalPathController;
 import br.beholder.pethfinder.core.distribution.Weibull;
 import br.beholder.pethfinder.core.matrix.MatrixGenerator;
 import br.beholder.pethfinder.core.model.Mapa;
@@ -32,7 +32,7 @@ import javax.swing.JTextArea;
 public class MainPanel extends javax.swing.JPanel {
     
     int pX, pY;
-    StepByStepPathController controller;
+    NormalPathController controller;
     /**
      * Creates new form MainPanel
      */
@@ -40,7 +40,7 @@ public class MainPanel extends javax.swing.JPanel {
         initComponents();
         setIcon();
         configureTheme();
-        controller = new StepByStepPathController(this);
+        controller = new NormalPathController(this);
     }
     private void setIcon(){
         
@@ -70,7 +70,7 @@ public class MainPanel extends javax.swing.JPanel {
         WeblafUtils.configurarBotao(webButton5, ColorController.COR_DESTAQUE, ColorController.COR_LETRA);
         WeblafUtils.configurarBotao(webButton4, ColorController.COR_DESTAQUE, ColorController.COR_LETRA);
         WeblafUtils.configurarBotao(webButton1, ColorController.COR_DESTAQUE, ColorController.COR_LETRA);
-        WeblafUtils.configurarBotao(webButton6, ColorController.COR_DESTAQUE, ColorController.COR_LETRA);
+//        WeblafUtils.configurarBotao(webButton6, ColorController.COR_DESTAQUE, ColorController.COR_LETRA);
         WeblafUtils.configurarBotao(webButton2, ColorController.COR_DESTAQUE, ColorController.COR_LETRA);
         WeblafUtils.configurarBotao(webButton3, ColorController.COR_DESTAQUE, ColorController.COR_LETRA);
         WeblafUtils.configurarBotao(webButton7, ColorController.COR_DESTAQUE, ColorController.COR_LETRA);
@@ -98,20 +98,6 @@ public class MainPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTabbedPane2 = new javax.swing.JTabbedPane();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
-        webButton8 = new com.alee.laf.button.WebButton();
-        webComboBox1 = new com.alee.laf.combobox.WebComboBox();
-        webButton6 = new com.alee.laf.button.WebButton();
-        webButton1 = new com.alee.laf.button.WebButton();
-        webButton4 = new com.alee.laf.button.WebButton();
-        webButton5 = new com.alee.laf.button.WebButton();
-        jSplitPane1 = new javax.swing.JSplitPane();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jPanel7 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -129,81 +115,19 @@ public class MainPanel extends javax.swing.JPanel {
         jScrollPane4 = new javax.swing.JScrollPane();
         jTextArea4 = new javax.swing.JTextArea();
         webButton7 = new com.alee.laf.button.WebButton();
-
-        setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        setLayout(new java.awt.BorderLayout());
-
-        jPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        jPanel2.setMinimumSize(new java.awt.Dimension(640, 480));
-        jPanel2.setPreferredSize(new java.awt.Dimension(640, 480));
-        jPanel2.setLayout(new java.awt.BorderLayout(20, 20));
-
-        jPanel5.setOpaque(false);
-        jPanel5.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
-
-        webButton8.setText("Passo a Passo");
-        webButton8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                webButton8ActionPerformed(evt);
-            }
-        });
-        jPanel5.add(webButton8);
-
-        webComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Raio", "Gulosa" }));
-        jPanel5.add(webComboBox1);
-
-        webButton6.setText("Rotinas");
-        webButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                webButton6ActionPerformed(evt);
-            }
-        });
-        jPanel5.add(webButton6);
-
-        webButton1.setText("Carregar PF");
-        webButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                webButton1ActionPerformed(evt);
-            }
-        });
-        jPanel5.add(webButton1);
-
-        webButton4.setText("Carregar XML");
-        webButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                webButton4ActionPerformed(evt);
-            }
-        });
-        jPanel5.add(webButton4);
-
-        webButton5.setText("Calcular");
-        webButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                webButton5ActionPerformed(evt);
-            }
-        });
-        jPanel5.add(webButton5);
-
-        jPanel2.add(jPanel5, java.awt.BorderLayout.SOUTH);
-
-        jSplitPane1.setDividerLocation(450);
-        jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
-
-        jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Courier New", 0, 13)); // NOI18N
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
-
-        jTabbedPane1.addTab("Console", jScrollPane1);
-
-        jSplitPane1.setBottomComponent(jTabbedPane1);
-
-        jPanel7.setLayout(new java.awt.BorderLayout());
-        jSplitPane1.setTopComponent(jPanel7);
-
-        jPanel2.add(jSplitPane1, java.awt.BorderLayout.CENTER);
-
-        jTabbedPane2.addTab("Teste Único", jPanel2);
+        jTabbedPane2 = new javax.swing.JTabbedPane();
+        jPanel2 = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
+        webButton8 = new com.alee.laf.button.WebButton();
+        webComboBox1 = new com.alee.laf.combobox.WebComboBox();
+        webButton1 = new com.alee.laf.button.WebButton();
+        webButton4 = new com.alee.laf.button.WebButton();
+        webButton5 = new com.alee.laf.button.WebButton();
+        jSplitPane1 = new javax.swing.JSplitPane();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        jPanel7 = new javax.swing.JPanel();
 
         jPanel1.setLayout(new java.awt.BorderLayout(5, 0));
 
@@ -276,21 +200,75 @@ public class MainPanel extends javax.swing.JPanel {
 
         jPanel1.add(jPanel6, java.awt.BorderLayout.EAST);
 
-        jTabbedPane2.addTab("Rotinas", jPanel1);
+        setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        setLayout(new java.awt.BorderLayout());
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        jPanel2.setMinimumSize(new java.awt.Dimension(640, 480));
+        jPanel2.setPreferredSize(new java.awt.Dimension(640, 480));
+        jPanel2.setLayout(new java.awt.BorderLayout(20, 20));
+
+        jPanel5.setOpaque(false);
+        jPanel5.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
+
+        webButton8.setText("Passo a Passo");
+        webButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                webButton8ActionPerformed(evt);
+            }
+        });
+        jPanel5.add(webButton8);
+
+        webComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Raio", "Gulosa" }));
+        jPanel5.add(webComboBox1);
+
+        webButton1.setText("Carregar PF");
+        webButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                webButton1ActionPerformed(evt);
+            }
+        });
+        jPanel5.add(webButton1);
+
+        webButton4.setText("Carregar XML");
+        webButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                webButton4ActionPerformed(evt);
+            }
+        });
+        jPanel5.add(webButton4);
+
+        webButton5.setText("Calcular");
+        webButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                webButton5ActionPerformed(evt);
+            }
+        });
+        jPanel5.add(webButton5);
+
+        jPanel2.add(jPanel5, java.awt.BorderLayout.SOUTH);
+
+        jSplitPane1.setDividerLocation(450);
+        jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setFont(new java.awt.Font("Courier New", 0, 13)); // NOI18N
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
+
+        jTabbedPane1.addTab("Console", jScrollPane1);
+
+        jSplitPane1.setBottomComponent(jTabbedPane1);
+
+        jPanel7.setLayout(new java.awt.BorderLayout());
+        jSplitPane1.setTopComponent(jPanel7);
+
+        jPanel2.add(jSplitPane1, java.awt.BorderLayout.CENTER);
+
+        jTabbedPane2.addTab("Teste Único", jPanel2);
 
         add(jTabbedPane2, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void webButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_webButton6ActionPerformed
-//        List<Mapa> mapas = PFPReader.lerPFP(100);
-//        String string = "";
-//        for (Mapa mapa1 : mapas) {
-//            mapa1.setPathMatrix(AStar.getInstance().getPath(mapa1,webComboBox1.getSelectedItem().toString()));
-//            string =  string.concat(AStar.getInstance().getIterations()+"\n");
-//        }
-//        System.out.println(string);
-        
-    }//GEN-LAST:event_webButton6ActionPerformed
     
     public JPanel getImagePane(){
         return jPanel7;
@@ -335,14 +313,14 @@ public class MainPanel extends javax.swing.JPanel {
         List<Mapa> mapas = PFPReader.lerTextArea(jTextArea2.getText(), 100);
         String string = "";
         for (Mapa mapa1 : mapas) {
-            mapa1.setPathMatrix(AStar.getInstance().getPath(mapa1,"Gulosa"));
+            mapa1.setPathMatrix(AStar.getInstance().getPath(mapa1,"Gulosa",false));
             string =  string.concat(AStar.getInstance().getIterations()+"\n");
         }
         jTextArea3.setText(string);
         string = "";
         mapas = PFPReader.lerTextArea(jTextArea5.getText(), 100);
         for (Mapa mapa1 : mapas) {
-            mapa1.setPathMatrix(AStar.getInstance().getPath(mapa1,"Gulosa"));
+            mapa1.setPathMatrix(AStar.getInstance().getPath(mapa1,"Gulosa",false));
             string =  string.concat(AStar.getInstance().getIterations()+"\n");
         }
         jTextArea6.setText(string);
@@ -386,7 +364,6 @@ public class MainPanel extends javax.swing.JPanel {
     private com.alee.laf.button.WebButton webButton3;
     private com.alee.laf.button.WebButton webButton4;
     private com.alee.laf.button.WebButton webButton5;
-    private com.alee.laf.button.WebButton webButton6;
     private com.alee.laf.button.WebButton webButton7;
     private com.alee.laf.button.WebButton webButton8;
     private com.alee.laf.combobox.WebComboBox webComboBox1;

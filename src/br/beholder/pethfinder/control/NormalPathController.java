@@ -19,7 +19,7 @@ import java.awt.Image;
  *
  * @author lite
  */
-public class StepByStepPathController {
+public class NormalPathController {
     Mapa mapa;
     MainPanel mainPanel;
     String tipo;
@@ -33,7 +33,7 @@ public class StepByStepPathController {
         mainPanel.getImagePane().revalidate();
     }
 
-    public StepByStepPathController(MainPanel mainPanel) {
+    public NormalPathController(MainPanel mainPanel) {
         this.mainPanel = mainPanel;
     }
 
@@ -52,7 +52,7 @@ public class StepByStepPathController {
     
     public void calculate(){
         if(mapa!=null){
-            mapa.setPathMatrix(AStar.getInstance().getPath(mapa,mainPanel.getCalcType()));
+            mapa.setPathMatrix(AStar.getInstance().getPath(mapa,mainPanel.getCalcType(),false));
             mainPanel.getConsoleArea().setText(AStar.getInstance().getConsoleLog());
             if(mapa.getPathMatrix()!=null){
                 setPathImage();

@@ -5,6 +5,7 @@
  */
 package br.beholder.pethfinder.core.search;
 
+import br.beholder.pethfinder.control.NormalPathController;
 import com.bethecoder.ascii_table.ASCIITable;
 import br.beholder.pethfinder.core.model.Cell;
 import br.beholder.pethfinder.core.model.Mapa;
@@ -21,7 +22,7 @@ public class AStar {
     private int iterations=0;
     public final int DIAGONAL_COST = 14;
     public final int V_H_COST = 10;
-    
+    private NormalPathController controller;
     
     //Blocked cells are just null Cell values in grid
     static Cell [][] grid = new Cell[5][5];
@@ -210,6 +211,10 @@ public class AStar {
         } 
     }
     
+    public void setController( NormalPathController controller){
+        this.controller = controller;
+    }
+    
     /*
     Params :
     tCase = test case No.
@@ -218,7 +223,7 @@ public class AStar {
     ei, ej = end location's x and y coordinates
     int[][] blocked = array containing inaccessible cell coordinates
     */
-    public boolean[][] getPath(Mapa mapa, String tipo){
+    public boolean[][] getPath(Mapa mapa, String tipo, boolean stepByStep){
         consoleLog="";
         int x= mapa.getTamanho().width;
         int y= mapa.getTamanho().height;
