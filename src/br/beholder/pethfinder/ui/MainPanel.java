@@ -5,6 +5,7 @@
  */
 package br.beholder.pethfinder.ui;
 
+import br.beholder.pethfinder.control.StepByStepPathController;
 import br.beholder.pethfinder.core.distribution.Weibull;
 import br.beholder.pethfinder.core.matrix.MatrixGenerator;
 import br.beholder.pethfinder.core.model.Mapa;
@@ -19,14 +20,19 @@ import br.beholder.pethfinder.ui.swing.MapRenderer;
 import br.beholder.pethfinder.ui.swing.webLaf.PSOutTabbedPaneUI;
 import br.beholder.pethfinder.ui.swing.webLaf.WeblafUtils;
 import br.beholder.pethfinder.ui.utils.ColorController;
+import com.alee.extended.image.DisplayType;
+import com.alee.extended.image.WebImage;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
 /**
  *
  * @author lite
  */
 public class MainPanel extends javax.swing.JPanel {
-    Mapa mapa;
+    
     int pX, pY;
+    StepByStepPathController controller;
     /**
      * Creates new form MainPanel
      */
@@ -34,6 +40,7 @@ public class MainPanel extends javax.swing.JPanel {
         initComponents();
         setIcon();
         configureTheme();
+        controller = new StepByStepPathController(this);
     }
     private void setIcon(){
         
@@ -72,6 +79,7 @@ public class MainPanel extends javax.swing.JPanel {
         
         jPanel1.setBackground(ColorController.FUNDO_ESCURO);
         jPanel2.setBackground(ColorController.COR_PRINCIPAL);
+        jPanel7.setBackground(ColorController.COR_PRINCIPAL);
         jTextArea1.setBackground(ColorController.COR_PRINCIPAL);
         jPanel1.setBackground(ColorController.COR_PRINCIPAL);
         setBackground(ColorController.COR_PRINCIPAL);
@@ -93,6 +101,7 @@ public class MainPanel extends javax.swing.JPanel {
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
+        webButton8 = new com.alee.laf.button.WebButton();
         webComboBox1 = new com.alee.laf.combobox.WebComboBox();
         webButton6 = new com.alee.laf.button.WebButton();
         webButton1 = new com.alee.laf.button.WebButton();
@@ -102,7 +111,7 @@ public class MainPanel extends javax.swing.JPanel {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
-        jLabel1 = new javax.swing.JLabel();
+        jPanel7 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -131,6 +140,14 @@ public class MainPanel extends javax.swing.JPanel {
 
         jPanel5.setOpaque(false);
         jPanel5.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
+
+        webButton8.setText("Passo a Passo");
+        webButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                webButton8ActionPerformed(evt);
+            }
+        });
+        jPanel5.add(webButton8);
 
         webComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Raio", "Gulosa" }));
         jPanel5.add(webComboBox1);
@@ -181,8 +198,8 @@ public class MainPanel extends javax.swing.JPanel {
 
         jSplitPane1.setBottomComponent(jTabbedPane1);
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jSplitPane1.setLeftComponent(jLabel1);
+        jPanel7.setLayout(new java.awt.BorderLayout());
+        jSplitPane1.setTopComponent(jPanel7);
 
         jPanel2.add(jSplitPane1, java.awt.BorderLayout.CENTER);
 
@@ -274,29 +291,29 @@ public class MainPanel extends javax.swing.JPanel {
 //        System.out.println(string);
         
     }//GEN-LAST:event_webButton6ActionPerformed
-
+    
+    public JPanel getImagePane(){
+        return jPanel7;
+    }
+    
+    public JTextArea getConsoleArea(){
+        return jTextArea1;
+    }
+    
+    public String getCalcType(){
+        return webComboBox1.getSelectedItem().toString();
+    }
+    
     private void webButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_webButton1ActionPerformed
-        mapa = PFReader.lerPF();
-        Image image= MapRenderer.getInstance().getFirstImage(mapa);
-        jLabel1.setIcon(new ImageIcon(image));
-
+        controller.readPF();
     }//GEN-LAST:event_webButton1ActionPerformed
 
     private void webButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_webButton4ActionPerformed
-        mapa = XMLReader.lerXML();
-        Image image= MapRenderer.getInstance().getFirstImage(mapa);
-        jLabel1.setIcon(new ImageIcon(image));
+        controller.readXML();
     }//GEN-LAST:event_webButton4ActionPerformed
 
     private void webButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_webButton5ActionPerformed
-        if(mapa!=null){
-            mapa.setPathMatrix(AStar.getInstance().getPath(mapa,webComboBox1.getSelectedItem().toString()));
-            jTextArea1.setText(AStar.getInstance().getConsoleLog());
-            if(mapa.getPathMatrix()!=null){
-                Image image= MapRenderer.getInstance().getPathedImage(mapa);
-                jLabel1.setIcon(new ImageIcon(image));
-            }
-        }
+        controller.calculate();
     }//GEN-LAST:event_webButton5ActionPerformed
 
     private void webButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_webButton2ActionPerformed
@@ -335,15 +352,20 @@ public class MainPanel extends javax.swing.JPanel {
         jTextArea4.setText(Weibull.getSimulation());
     }//GEN-LAST:event_webButton7ActionPerformed
 
+    private void webButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_webButton8ActionPerformed
+        controller.setTipo(webComboBox1.getSelectedItem().toString());
+        
+    }//GEN-LAST:event_webButton8ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -366,6 +388,7 @@ public class MainPanel extends javax.swing.JPanel {
     private com.alee.laf.button.WebButton webButton5;
     private com.alee.laf.button.WebButton webButton6;
     private com.alee.laf.button.WebButton webButton7;
+    private com.alee.laf.button.WebButton webButton8;
     private com.alee.laf.combobox.WebComboBox webComboBox1;
     // End of variables declaration//GEN-END:variables
 }
