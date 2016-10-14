@@ -22,7 +22,7 @@ public abstract class DefaultAStarMethod implements AStarMethod{
     int delay = 100;
     public final int DIAGONAL_COST = 14;
     public final int V_H_COST = 10;
-    private boolean stepByStep;
+    boolean stepByStep;
     NormalPathController controller;
     private Mapa mapa;
     
@@ -71,7 +71,6 @@ public abstract class DefaultAStarMethod implements AStarMethod{
     
     
     public boolean[][] getPath(){
-        this.stepByStep = stepByStep;
         consoleLog="";
         int x= mapa.getTamanho().height;
         int y= mapa.getTamanho().width;
@@ -142,5 +141,72 @@ public abstract class DefaultAStarMethod implements AStarMethod{
             consoleLog = consoleLog.concat("No possible path");
         }
         return null;
+    }
+    
+    @Override
+    public void calculate() {
+        iterations=0;
+        open.add(grid[startI][startJ]);
+        
+        Cell current;
+        
+        while(true){ 
+            iterations++;
+            current = open.poll();
+            if(current==null)break;
+            closed[current.getPosition().y][current.getPosition().x]=true; 
+
+            if(current.equals(grid[endI][endJ])){
+                return; 
+            } 
+
+            Cell t;  
+            if(current.getPosition().y-1>=0){
+                t = grid[current.getPosition().y-1][current.getPosition().x];
+                checkAndUpdateCost(current, t, current.getFinalCost()+V_H_COST); 
+
+                if(current.getPosition().x-1>=0){                      
+                    t = grid[current.getPosition().y-1][current.getPosition().x-1];
+                    checkAndUpdateCost(current, t, current.getFinalCost()+DIAGONAL_COST); 
+                }
+
+                if(current.getPosition().x+1<grid[0].length){
+                    t = grid[current.getPosition().y-1][current.getPosition().x+1];
+                    checkAndUpdateCost(current, t, current.getFinalCost()+DIAGONAL_COST); 
+                }
+            } 
+
+            if(current.getPosition().x-1>=0){
+                t = grid[current.getPosition().y][current.getPosition().x-1];
+                checkAndUpdateCost(current, t, current.getFinalCost()+V_H_COST); 
+            }
+
+            if(current.getPosition().x+1<grid[0].length){
+                t = grid[current.getPosition().y][current.getPosition().x+1];
+                checkAndUpdateCost(current, t, current.getFinalCost()+V_H_COST); 
+            }
+
+            if(current.getPosition().y+1<grid.length){
+                t = grid[current.getPosition().y+1][current.getPosition().x];
+                checkAndUpdateCost(current, t, current.getFinalCost()+V_H_COST); 
+
+                if(current.getPosition().x-1>=0){
+                    t = grid[current.getPosition().y+1][current.getPosition().x-1];
+                    checkAndUpdateCost(current, t, current.getFinalCost()+DIAGONAL_COST); 
+                }
+                
+                if(current.getPosition().x+1<grid[0].length){
+                   t = grid[current.getPosition().y+1][current.getPosition().x+1];
+                    checkAndUpdateCost(current, t, current.getFinalCost()+DIAGONAL_COST); 
+                }  
+            }
+            if(stepByStep){
+                controller.stepImage(closed);
+                try {
+                    Thread.sleep(delay);
+                } catch (InterruptedException ex) {
+                }
+            }
+        } 
     }
 }
