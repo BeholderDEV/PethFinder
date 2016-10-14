@@ -8,7 +8,8 @@ package br.beholder.pethfinder.control;
 import br.beholder.pethfinder.core.model.Mapa;
 import br.beholder.pethfinder.core.reader.PFReader;
 import br.beholder.pethfinder.core.reader.XMLReader;
-import br.beholder.pethfinder.core.search.AStar;
+import br.beholder.pethfinder.core.search.DefaultAStarMethod;
+import br.beholder.pethfinder.core.search.SearchMethodFactory;
 import br.beholder.pethfinder.ui.MainPanel;
 import br.beholder.pethfinder.ui.swing.MapRenderer;
 import com.alee.extended.image.DisplayType;
@@ -61,8 +62,9 @@ public class NormalPathController {
 
     public void calculate() {
         if (mapa != null) {
-            mapa.setPathMatrix(AStar.getInstance().getPath(mapa, mainPanel.getCalcType(), false));
-            mainPanel.getConsoleArea().setText(AStar.getInstance().getConsoleLog());
+            DefaultAStarMethod aStarMethod = SearchMethodFactory.create(mainPanel.getCalcType(), false, this, mapa);
+            mapa.setPathMatrix(aStarMethod.getPath());
+            mainPanel.getConsoleArea().setText(aStarMethod.getConsoleLog());
             if (mapa.getPathMatrix() != null) {
                 Image image = MapRenderer.getInstance().getPathedImage(mapa);
                 setPathImage(image);
@@ -72,14 +74,16 @@ public class NormalPathController {
 
     public void calculateStep() {
         if (mapa != null) {
-            AStar.getInstance().setController(this);
-            AStar.getInstance().setDelay(mainPanel.getTime());
+            DefaultAStarMethod aStarMethod = SearchMethodFactory.create(mainPanel.getCalcType(), false, this, mapa);
+            DefaultAStarMethod aStarMethodStep = SearchMethodFactory.create(mainPanel.getCalcType(), true, this, mapa);
+            aStarMethodStep.setDelay(mainPanel.getTime());
             Thread t = new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    AStar.getInstance().getPath(mapa, mainPanel.getCalcType(), true);
-                    mapa.setPathMatrix(AStar.getInstance().getPath(mapa,mainPanel.getCalcType(),false));
-                    mainPanel.getConsoleArea().setText(AStar.getInstance().getConsoleLog());
+                    aStarMethodStep.getPath();
+                    
+                    mapa.setPathMatrix(aStarMethod.getPath());
+                    mainPanel.getConsoleArea().setText(aStarMethod.getConsoleLog());
                     if(mapa.getPathMatrix()!=null){
                         Image image= MapRenderer.getInstance().getPathedImage(mapa);
                         setPathImage(image);

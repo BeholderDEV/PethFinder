@@ -6,22 +6,9 @@
 package br.beholder.pethfinder.ui;
 
 import br.beholder.pethfinder.control.NormalPathController;
-import br.beholder.pethfinder.core.distribution.Weibull;
-import br.beholder.pethfinder.core.matrix.MatrixGenerator;
-import br.beholder.pethfinder.core.model.Mapa;
-import br.beholder.pethfinder.core.reader.PFPReader;
-import br.beholder.pethfinder.core.reader.PFReader;
-import br.beholder.pethfinder.core.reader.XMLReader;
-import br.beholder.pethfinder.core.search.AStar;
-import java.awt.Image;
-import java.util.List;
-import javax.swing.ImageIcon;
-import br.beholder.pethfinder.ui.swing.MapRenderer;
 import br.beholder.pethfinder.ui.swing.webLaf.PSOutTabbedPaneUI;
 import br.beholder.pethfinder.ui.swing.webLaf.WeblafUtils;
 import br.beholder.pethfinder.ui.utils.ColorController;
-import com.alee.extended.image.DisplayType;
-import com.alee.extended.image.WebImage;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
