@@ -92,9 +92,10 @@ public class MainPanel extends javax.swing.JPanel {
         jPanel2.setLayout(new java.awt.BorderLayout(20, 20));
 
         jPanel5.setOpaque(false);
-        jPanel5.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
+        jPanel5.setLayout(new java.awt.FlowLayout(2));
 
         jTextField1.setText("100");
+        jTextField1.setPreferredSize(new java.awt.Dimension(100, 35));
         jPanel5.add(jTextField1);
 
         webButton8.setText("Passo a Passo");
@@ -106,6 +107,7 @@ public class MainPanel extends javax.swing.JPanel {
         jPanel5.add(webButton8);
 
         webComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Raio", "Gulosa" }));
+        webComboBox1.setMinimumSize(new java.awt.Dimension(56, 30));
         jPanel5.add(webComboBox1);
 
         webButton1.setText("Carregar PF");
