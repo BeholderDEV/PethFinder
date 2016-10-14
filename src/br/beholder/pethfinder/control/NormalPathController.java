@@ -5,6 +5,7 @@
  */
 package br.beholder.pethfinder.control;
 
+import br.beholder.pethfinder.core.model.Cell;
 import br.beholder.pethfinder.core.model.Mapa;
 import br.beholder.pethfinder.core.reader.PFReader;
 import br.beholder.pethfinder.core.reader.XMLReader;
@@ -97,6 +98,10 @@ public class NormalPathController {
 
     public void stepImage(boolean[][] grid) {
         Image imagem = MapRenderer.getInstance().getStepImage(mapa, grid);
+        setPathImage(imagem);
+    }
+    public void stepImage(boolean[][] closed, Cell[][] grid) {
+        Image imagem = MapRenderer.getInstance().getStepImage(mapa, closed,grid);
         setPathImage(imagem);
     }
 

@@ -201,7 +201,7 @@ public abstract class DefaultAStarMethod implements AStarMethod{
                 }  
             }
             if(stepByStep){
-                controller.stepImage(closed);
+                controller.stepImage(closed,grid);
                 try {
                     Thread.sleep(delay);
                 } catch (InterruptedException ex) {
