@@ -150,24 +150,29 @@ public class MapRenderer extends JComponent{
         Graphics2D g2d = (Graphics2D) bi.getGraphics();
         
         g2d.setColor(Color.DARK_GRAY);
+        int cartX;
+        int cartY;
+        int isoX;
+        int isoY;
         int[][] matrix = mapa.getMatrix();
         for (int i = 0; i < mapa.getTamanho().height; i++) {
             for (int j = 0; j < mapa.getTamanho().width; j++) {
-                int cartX = Math.round(j*tile_size/2f);
-                int cartY =  Math.round(i*tile_size/2f);
-                int isoX = cartX - cartY;
-                int isoY = Math.round((cartX + cartY) / 2f);
+                cartX = Math.round(j*tile_size/2f);
+                cartY =  Math.round(i*tile_size/2f);
+                isoX = cartX - cartY;
+                isoY = Math.round((cartX + cartY) / 2f);
                 g2d.drawImage(tile_set, base+isoX, isoY, base+isoX+tile_size, isoY+tile_size, 0, 0, tile_size, tile_size, observer);
                 if(matrix[i][j]==1){
                     g2d.drawImage(tile_set, base+isoX, isoY-tile_size/2, base+isoX+tile_size, isoY+tile_size/2, tile_size, 0, 2*tile_size, tile_size, observer);
                 }
                 if(grid[i][j]!=null){
                     if(grid[i][j].getFinalCost()>0){
-                        g2d.drawImage(tile_set, base+isoX, isoY-tile_size/2, base+isoX+tile_size, isoY+tile_size/2, 4*tile_size, 0, 5*tile_size, tile_size, observer);
+                        g2d.drawImage(tile_set, base+isoX, isoY-tile_size/2, base+isoX+tile_size, isoY+tile_size/2, 5*tile_size, 0, 6*tile_size, tile_size, observer);
+                        
                     }
                 }
                 if(closed[i][j]){
-                    g2d.drawImage(tile_set, base+isoX, isoY-tile_size/2, base+isoX+tile_size, isoY+tile_size/2, 5*tile_size, 0, 6*tile_size, tile_size, observer);
+                    g2d.drawImage(tile_set, base+isoX, isoY-tile_size/2, base+isoX+tile_size, isoY+tile_size/2, 6*tile_size, 0, 7*tile_size, tile_size, observer);
                 }
                 
                 if(i==mapa.getPontoInicial().y && j==mapa.getPontoInicial().x){
@@ -175,9 +180,24 @@ public class MapRenderer extends JComponent{
                 } else if(i==mapa.getPontoFinal().y && j==mapa.getPontoFinal().x){
                     g2d.drawImage(tile_set, base+isoX, isoY-tile_size/2, base+isoX+tile_size, isoY+tile_size/2, 3*tile_size, 0, 4*tile_size, tile_size, observer);
                 }
-                
-                
-//                g2d.drawRect(j*tile_size, i*tile_size, tile_size, tile_size);
+                if(grid[i][j]!=null){
+                    if(grid[i][j].getFinalCost()>0){
+                        g2d.drawString(grid[i][j].getFinalCost()+"", base+isoX+5*tile_size/12, isoY+tile_size/3);
+                    }
+                }                
+            }
+        }
+        for (int i = 0; i < mapa.getTamanho().height; i++) {
+            for (int j = 0; j < mapa.getTamanho().width; j++) {
+                if(grid[i][j]!=null){
+                    if(grid[i][j].getFinalCost()>0){
+                        cartX = Math.round(j*tile_size/2f);
+                        cartY =  Math.round(i*tile_size/2f);
+                        isoX = cartX - cartY;
+                        isoY = Math.round((cartX + cartY) / 2f);
+                        g2d.drawString(grid[i][j].getFinalCost()+"", base+isoX+5*tile_size/12, isoY+tile_size/3);
+                    }
+                }                
             }
         }
         return bi;
