@@ -46,8 +46,22 @@ public final class ColorController {
                 new Color(241,67,60)
             };
     }
+    private static Color[] getFlatTheme(){
+        return new Color[]{
+                new Color(251,251,251),
+                
+                new Color(10,100,100),
+                new Color(0,50,50), 
+                new Color(15,122,110),
+                
+                
+                new Color(26,188,156),
+                new Color(34,200,180),
+                new Color(241,67,60)
+            };
+    }
     
-    private static final Color[] THEME= getASHTheme();
+    private static final Color[] THEME= getFlatTheme();
     public static final Color COR_LETRA = THEME[0];
     public static final Color COR_DESTAQUE = THEME[1];
     public static final Color COR_PRINCIPAL = THEME[2];
