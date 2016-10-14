@@ -47,12 +47,12 @@ public class XMLReader {
                 node = nodes.item(0);
                 String ponto = node.getTextContent();
                 String[] pos = ponto.split(",");
-                Point inicial = new Point(Integer.parseInt(pos[1]), Integer.parseInt(pos[0]));
+                Point inicial = new Point(Integer.parseInt(pos[1])-1, Integer.parseInt(pos[0])-1);
                 nodes = doc.getElementsByTagName("FINAL");
                 node = nodes.item(0);
                 ponto = node.getTextContent();
                 pos = ponto.split(",");
-                Point fina = new Point(Integer.parseInt(pos[1]), Integer.parseInt(pos[0]));
+                Point fina = new Point(Integer.parseInt(pos[1])-1, Integer.parseInt(pos[0])-1);
                 
                 int[][] matriz = new int[linhas][colunas];
                 for (int i = 0; i < linhas; i++) {
@@ -67,9 +67,9 @@ public class XMLReader {
                     node = nodes.item(i);
                     ponto = node.getTextContent();
                     pos = ponto.split(",");
-                    matriz[Integer.parseInt(pos[0])][Integer.parseInt(pos[1])]=1;
-                    blocked[i][0]=Integer.parseInt(pos[0]);
-                    blocked[i][1]=Integer.parseInt(pos[1]);
+                    matriz[Integer.parseInt(pos[0])-1][Integer.parseInt(pos[1])-1]=1;
+                    blocked[i][0]=Integer.parseInt(pos[0])-1;
+                    blocked[i][1]=Integer.parseInt(pos[1])-1;
                 }
                 
                 Mapa mapa = new Mapa(tamanho, matriz,blocked, inicial, fina);
